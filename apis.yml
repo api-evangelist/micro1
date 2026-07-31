@@ -1,0 +1,23 @@
+aid: micro1
+name: micro1
+description: 'micro1 is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
+  and added to the network as a stub for full-pipeline profiling.'
+url: https://raw.githubusercontent.com/api-evangelist/micro1/refs/heads/main/apis.yml
+x-type: company
+x-source: harvest:secondary-market
+x-tier: stub
+x-tier-reason: harvest
+specificationVersion: '0.20'
+created: '2026-07-31'
+modified: '2026-07-31'
+tags:
+- Company
+apis: []
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+- FN: APIs.json
+  email: info@apis.io
+common:
+- type: Website
+  url: https://forgeglobal.com/micro1_stock/
