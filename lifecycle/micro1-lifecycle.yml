@@ -1,0 +1,70 @@
+generated: '2026-07-31'
+method: searched
+source: >-
+  Searched https://ai-recruiter.micro1.ai (full docs corpus via llms.txt / llms-full.txt),
+  https://www.micro1.ai/legal, and probed status.micro1.ai, /changelog on both the docs and
+  marketing hosts. Versioning derived from openapi/micro1-ai-recruiter-openapi.yml (info.version and
+  path shapes); deprecated operations derived from the same spec.
+description: >-
+  micro1's AI Recruiter API has essentially no published lifecycle surface. This artifact records
+  the absences as observed facts, not as an oversight to be papered over: there is no changelog, no
+  status page, no deprecation policy, no SLA, and no API versioning mechanism. Nothing here earns a
+  StatusPage or Deprecation pointer in apis.yml, and none was emitted.
+versioning:
+  scheme: none
+  current: '1.0.0'
+  mechanism: null
+  evidence: >-
+    OpenAPI info.version is "1.0.0". No path carries a version segment (/interview, /jobs, /webhook —
+    not /v1/...). No version request header and no date pinning is documented anywhere in the docs
+    corpus.
+  docs: null
+  risk: >-
+    With no version negotiation, a breaking change to the response envelope or the report schema
+    would reach every existing integration at once.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  evidence: >-
+    No deprecation or sunset policy appears in the docs corpus; no operation is flagged deprecated
+    in the OpenAPI.
+sla:
+  url: null
+  uptime_target: null
+  published: false
+  note: >-
+    No SLA or uptime commitment is published. The docs promise a support response time — "we'll
+    respond within 6 hours max" — which is a support-responsiveness statement, not an availability SLA.
+status_page:
+  url: null
+  published: false
+  probed:
+  - {host: status.micro1.ai, result: NXDOMAIN}
+  - {url: 'https://www.micro1.ai/status', result: 'not linked from site nav, footer or sitemap'}
+changelog:
+  url: null
+  published: false
+  probed:
+  - {url: 'https://ai-recruiter.micro1.ai/changelog', status: 404}
+  - {url: 'https://www.micro1.ai/changelog', status: 404}
+  note: >-
+    micro1 runs a newsroom (https://www.micro1.ai/newsroom) and a research page
+    (https://www.micro1.ai/research), but neither is a dated API changelog.
+support:
+  email: support@micro1.ai
+  documented_response_time: 6 hours max
+  source: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+rate_limits:
+  url: null
+  published: false
+deprecated_operations: []
+deprecated_operations_note: 'No operation in openapi/micro1-ai-recruiter-openapi.yml carries deprecated: true.'
+observed_deprecation_signal:
+- signal: interview.completed webhook event
+  detail: >-
+    Documented as "same as interview_recording.completed" — an aliased/legacy event kept alongside
+    its replacement, but not formally marked deprecated.
+  source: https://ai-recruiter.micro1.ai/api-reference/getting-started/webhooks/introductions

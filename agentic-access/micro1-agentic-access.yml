@@ -1,0 +1,256 @@
+generated: '2026-07-31'
+method: generated
+source: openapi/micro1-ai-recruiter-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 18
+  by_action_class:
+    acting: 10
+    connected: 8
+  by_consequence:
+    write: 10
+    read: 8
+  human_in_the_loop_required: 0
+operations:
+- path: /interview
+  method: post
+  operationId: aiInterviewer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /custom/interview
+  method: post
+  operationId: aiInterviewer-ce2743c0-2309-41eb-8ff2-44c55c138c25
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /interviews
+  method: get
+  operationId: aiInterviewer-34586a03-d777-4757-8c54-f8d7e4c821a5
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /interview/{interviewId}
+  method: put
+  operationId: aiInterviewer-6d5d608a-0b31-460d-80b8-a69aa43aac17
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /interview/{interviewId}
+  method: delete
+  operationId: aiInterviewer-b7d10a6a-f334-4836-933f-c9a62d33d80b
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /interview/invite
+  method: post
+  operationId: aiInterviewer-08720534-ee71-4a6c-aff1-25c48ed78c6d
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /interview/invites
+  method: get
+  operationId: aiInterviewer-f690665f-6248-4c86-b317-0f18ebecf728
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /interview/reports
+  method: get
+  operationId: aiInterviewer-c5c30f81-a2b4-45ca-9943-f034683993b0
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /interview/recording
+  method: get
+  operationId: aiInterviewer-224f9971-cd82-4432-9f9f-8e4f1ba73345
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /mock/interview
+  method: post
+  operationId: aiInterviewer-2bc90237-ae08-40ae-8d61-08907a167e52
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /jobs
+  method: get
+  operationId: jobsApplicant
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /job/{jobId}/applicant
+  method: post
+  operationId: jobsApplicant-c1ce8fbf-390b-412b-9895-d422b21e823e
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /job/{jobId}/applicants
+  method: get
+  operationId: jobsApplicant-8934b0b6-90a5-42a4-a5e6-c37d3833718e
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /job/applicant/{jobApplicantId}
+  method: get
+  operationId: jobsApplicant-e3619770-a47f-4349-838d-a612736b5621
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /webhook
+  method: post
+  operationId: webhookSetup
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /webhooks
+  method: get
+  operationId: webhookSetup-51ac71f1-e1da-425d-afa2-d527e716b7e6
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /webhook/{webhookId}
+  method: put
+  operationId: webhookSetup-c050afb6-e424-4a49-81a7-839386c17724
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /webhook/{webhookId}
+  method: delete
+  operationId: webhookSetup-223f3d34-faeb-4c70-91df-a08a2baa2141
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required

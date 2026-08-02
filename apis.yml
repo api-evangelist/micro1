@@ -1,18 +1,83 @@
 aid: micro1
 name: micro1
-description: 'micro1 is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  micro1 is an AI-native talent and human-data company. Its AI recruiter, Zara, runs conversational
+  technical interviews at scale — generating role-specific questions from the skills you want tested,
+  branching in real time, adding an optional coding exercise, and returning a structured report with
+  per-skill AI ratings, CEFR-style soft-skill scores, a proctoring integrity score, transcripts and
+  session recordings. The company also operates an expert-human-data business (Realm reinforcement-
+  learning environments, Cortex agent evaluations, and robotics data collection) that supplies training
+  and evaluation data to frontier AI labs. The micro1 Public API exposes the AI-interview platform:
+  create standard or custom-question interviews, invite candidates, list jobs and job applicants,
+  retrieve completed reports and recordings, and register webhooks so an ATS is notified in real time
+  when interviews start, reports are generated, recordings finish processing, or resume scores land.
 url: https://raw.githubusercontent.com/api-evangelist/micro1/refs/heads/main/apis.yml
+image: https://cdn.prod.website-files.com/6a04bd23eb9d40f76dac1249/6a21b7903ec396493b15c2a1_OG%20(52)%20(1).jpg
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.21'
 created: '2026-07-31'
 modified: '2026-07-31'
 tags:
 - Company
-apis: []
+- recruiting
+- hiring
+- ai-interviews
+- talent-assessment
+- candidate-screening
+- applicant-tracking
+- human-resources
+- proctoring
+- webhooks
+- agent-native
+- ai-training-data
+apis:
+- name: micro1 Public API
+  description: >-
+    The micro1 AI Recruiter public REST API. Create conversational AI interviews from a skill list (or
+    from your own custom questions), preview the questions the AI will ask, invite candidates by email,
+    list jobs and job applicants, pull completed interview reports (per-skill technical ratings, soft
+    skills, coding evaluation, proctoring score and violations, full transcript) and interview
+    recordings, and manage webhook subscriptions for the platform's nine event types. Authenticated
+    with an `x-api-key` header issued from the micro1 dashboard.
+  humanURL: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  baseURL: https://public.api.micro1.ai
+  tags:
+  - recruiting
+  - hiring
+  - ai-interviews
+  - talent-assessment
+  - candidate-screening
+  - applicant-tracking
+  - proctoring
+  - webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/micro1-ai-recruiter-openapi.yml
+  - type: OpenAPI
+    url: openapi/_original/micro1-ai-recruiter-openapi-original.json
+  - type: Documentation
+    url: https://ai-recruiter.micro1.ai/
+  - type: APIReference
+    url: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  - type: GettingStarted
+    url: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  - type: Authentication
+    url: authentication/micro1-authentication.yml
+  - type: Conventions
+    url: conventions/micro1-conventions.yml
+  - type: ErrorCatalog
+    url: errors/micro1-problem-types.yml
+  - type: DataModel
+    url: data-model/micro1-data-model.yml
+  - type: Webhooks
+    url: asyncapi/micro1-webhooks.yml
+  - type: Overlay
+    url: overlays/micro1-ai-recruiter-overlay.yaml
+  - type: MCPServer
+    url: mcp/micro1-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/micro1-tool-crosswalk.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +85,61 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/micro1_stock/
+  url: https://www.micro1.ai/
+- type: DeveloperPortal
+  url: https://ai-recruiter.micro1.ai/
+- type: Documentation
+  url: https://ai-recruiter.micro1.ai/
+- type: APIReference
+  url: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+- type: GettingStarted
+  url: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+- type: Blog
+  url: https://www.micro1.ai/blog
+- type: Support
+  url: mailto:support@micro1.ai
+- type: SignUp
+  url: https://www.zara.micro1.ai/
+- type: Login
+  url: https://talent.micro1.ai/login
+- type: TermsOfService
+  url: https://www.micro1.ai/legal
+- type: PrivacyPolicy
+  url: https://www.micro1.ai/legal/privacy-policy
+- type: LLMsTxt
+  url: llms/micro1-llms.txt
+- type: WellKnown
+  url: well-known/micro1-well-known.yml
+- type: AgentCard
+  url: a2a/micro1-a2a.yml
+- type: MCPServer
+  url: mcp/micro1-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/micro1-tool-crosswalk.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/micro1-agentic-access.yml
+- type: Authentication
+  url: authentication/micro1-authentication.yml
+- type: Conventions
+  url: conventions/micro1-conventions.yml
+- type: Conformance
+  url: conformance/micro1-conformance.yml
+- type: ErrorCatalog
+  url: errors/micro1-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/micro1-lifecycle.yml
+- type: DataModel
+  url: data-model/micro1-data-model.yml
+- type: Webhooks
+  url: asyncapi/micro1-webhooks.yml
+- type: Overlay
+  url: overlays/micro1-ai-recruiter-overlay.yaml
+- type: DomainSecurity
+  url: security/micro1-domain-security.yml
+x-enrichment:
+  date: '2026-07-31'
+  status: enriched
+  artifacts_added: 24
+  pass: local-v1

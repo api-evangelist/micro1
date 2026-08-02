@@ -1,0 +1,68 @@
+generated: '2026-07-31'
+method: probed
+source: https://ai-recruiter.micro1.ai/.well-known/agent-card.json
+description: >-
+  micro1 publishes an A2A Agent Card from its documentation host. The card is served over the
+  canonical RFC 8615 path, parses as a JSON object, and carries real AgentCard shape (name, url,
+  version, protocolVersion, capabilities, skills). Its single skill points at a provider-authored
+  Agent Skill markdown file, also served from /.well-known/ — captured verbatim in
+  ../skills/micro1-recruiter-skill.md. NOTE: the card is a documentation-surface agent card (the
+  advertised url and preferredTransport point at the docs site, and the executable surface behind it
+  is the Mintlify MCP server at https://ai-recruiter.micro1.ai/mcp) — it does not front the
+  https://public.api.micro1.ai REST API directly. See ../mcp/micro1-tool-crosswalk.yml.
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: ai-recruiter.micro1.ai
+  legacy_path_probed: /.well-known/agent.json
+  legacy_path_status: 404
+conformance:
+  spec: A2A 1.0.0
+  grade: conformant
+  hard_checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+  protocol_version: '0.3'
+  preferred_transport: HTTP+JSON
+  deviations:
+  - supportedInterfaces-instead-of-additionalInterfaces
+  - no-description-field
+  - protocolVersion-not-fully-qualified (0.3 rather than 0.3.0)
+  notes: >-
+    All three hard checks pass, so the card grades conformant. It nevertheless deviates from A2A
+    1.0.0 field naming: it uses `supportedInterfaces` where the 1.0.0 schema names the field
+    `additionalInterfaces`, and it omits the human-readable top-level `description`. `capabilities`
+    declares streaming:false and pushNotifications:false — an honest declaration, not an omission.
+card:
+  name: micro1 API
+  url: https://ai-recruiter.micro1.ai/
+  version: 1.0.0
+  protocol_version: '0.3'
+  preferred_transport: HTTP+JSON
+  provider_organization: micro1 API
+  documentation_url: https://ai-recruiter.micro1.ai/
+  default_input_modes:
+  - text/plain
+  default_output_modes:
+  - text/plain
+  capabilities:
+    streaming: false
+    push_notifications: false
+  skills: 1
+  file: micro1-agent-card.json
+skills:
+- id: micro1
+  name: Micro1
+  description: >-
+    Use when building recruitment automation workflows, creating AI-powered interviews, managing
+    candidate pipelines, inviting candidates to interviews, retrieving interview reports and
+    recordings, or integrating recruitment processes with external ATS systems via webhooks.
+  url: https://ai-recruiter.micro1.ai/.well-known/agent-skills/micro1/skill.md
+  tags: []
+  saved_as: ../skills/micro1-recruiter-skill.md
+x-evidence:
+  fetched: '2026-07-31'
+  url: https://ai-recruiter.micro1.ai/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json

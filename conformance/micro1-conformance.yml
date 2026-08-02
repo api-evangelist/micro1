@@ -1,0 +1,113 @@
+generated: '2026-07-31'
+method: derived
+source: >-
+  Derived from openapi/micro1-ai-recruiter-openapi.yml (securitySchemes, response schemas,
+  parameters), the probed /.well-known/ surface (well-known/micro1-well-known.yml), the live A2A
+  agent card (a2a/micro1-a2a.yml) and MCP server (mcp/micro1-mcp.yml), plus a search of
+  https://www.micro1.ai/legal and the docs corpus for published compliance claims.
+description: >-
+  Which cross-cutting and industry standards the micro1 Public API conforms to. micro1's agent-side
+  posture (A2A, MCP, llms.txt, agent skills) is well ahead of its API-side posture (no OAuth, no
+  RFC 9457, no RFC 9116, no published compliance program). No `Compliance` pointer is wired in
+  apis.yml because micro1 publishes no certifications — see the compliance block below.
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: >-
+    openapi: 3.0.3 served publicly and anonymously at https://ai-recruiter.micro1.ai/openapi.json,
+    18 operations across 16 paths, 75 component schemas, securitySchemes defined and applied.
+- id: api-key-auth
+  conforms: true
+  evidence: securitySchemes.apiKey — type apiKey, in header, name x-api-key; applied globally via security[].
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 security scheme in the spec; no OAuth endpoints documented.
+- id: oidc
+  conforms: false
+  evidence: >-
+    /.well-known/openid-configuration returns 404 on the docs host and 403 (API-Gateway catch-all)
+    on the API host. The 200s observed on zara.micro1.ai are an SPA HTML shell, not OIDC discovery.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors are returned as application/json {"status": false, "message": string}; no
+    application/problem+json media type and no type/title/detail/instance members.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404/403 on every micro1 host probed.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header support and no deprecation policy published.
+- id: rfc8615-well-known-uris
+  conforms: true
+  evidence: >-
+    The A2A agent card and the agent skill are both served from /.well-known/ on
+    ai-recruiter.micro1.ai per RFC 8615.
+- id: a2a-1.0
+  conforms: true
+  grade: conformant
+  evidence: >-
+    /.well-known/agent-card.json returns a JSON AgentCard with capabilities as an object,
+    protocolVersion 0.3 and skills as an array. Deviates on field naming (supportedInterfaces rather
+    than additionalInterfaces) and omits description — see a2a/micro1-a2a.yml.
+- id: model-context-protocol
+  conforms: true
+  evidence: >-
+    Live MCP server at https://ai-recruiter.micro1.ai/mcp answered initialize (protocolVersion
+    2025-06-18) and tools/list anonymously on 2026-07-31; three tools returned with real inputSchemas.
+- id: llms-txt
+  conforms: true
+  evidence: https://ai-recruiter.micro1.ai/llms.txt and /llms-full.txt both return 200 text/plain.
+- id: asyncapi
+  conforms: false
+  evidence: >-
+    No AsyncAPI document published (/asyncapi.yaml and /asyncapi.json 404). The event surface is
+    outbound webhooks documented in prose — captured in asyncapi/micro1-webhooks.yml.
+- id: webhook-signature-verification
+  conforms: false
+  evidence: >-
+    No signing secret, signature header or timestamp header is documented for webhook deliveries;
+    receivers cannot verify origin.
+- id: idempotency-key
+  conforms: false
+  evidence: No Idempotency-Key header or parameter in the spec; micro1's own skill documents duplicate-session risk.
+- id: rate-limit-headers
+  conforms: false
+  evidence: No RateLimit/X-RateLimit headers in the spec and no published rate-limit documentation.
+- id: cors
+  conforms: true
+  evidence: Every response declares Access-Control-Allow-Origin and Access-Control-Allow-Credentials.
+- id: tls-1.3
+  conforms: true
+  evidence: 'TLSv1.3 on www.micro1.ai, ai-recruiter.micro1.ai and public.api.micro1.ai — see security/micro1-domain-security.yml.'
+- id: hsts
+  conforms: partial
+  evidence: >-
+    HSTS present on www.micro1.ai (max-age 31536000) and ai-recruiter.micro1.ai (max-age 63072000),
+    but ABSENT on the API host public.api.micro1.ai.
+- id: dnssec
+  conforms: false
+  evidence: 'micro1.ai has no DNSSEC and no CAA records — see security/micro1-domain-security.yml.'
+- id: dmarc
+  conforms: partial
+  evidence: SPF and DMARC records exist on micro1.ai but the DMARC policy is p=none (monitor only).
+- id: gdpr
+  conforms: unknown
+  evidence: >-
+    micro1 publishes a website privacy policy, a candidate privacy notice and a cookie notice at
+    https://www.micro1.ai/legal, but no explicit GDPR compliance statement, DPA, or sub-processor
+    list was found.
+compliance_program:
+  published: false
+  trust_center: null
+  certifications: []
+  probed:
+  - {host: trust.micro1.ai, result: NXDOMAIN}
+  - {host: security.micro1.ai, result: NXDOMAIN}
+  - {url: 'https://www.micro1.ai/security', status: 404}
+  - {url: 'https://www.micro1.ai/trust', status: 404}
+  - {url: 'https://www.micro1.ai/legal', status: 200, result: 'legal documents only — no SOC 2, ISO 27001, PCI, HIPAA or FedRAMP claim'}
+  note: >-
+    No named certification was found on any micro1 surface, so no `Compliance` and no `TrustCenter`
+    pointer is wired in apis.yml. This is a genuine gap for a vendor that processes candidate PII,
+    resumes, interview video and biometric-adjacent proctoring signal.

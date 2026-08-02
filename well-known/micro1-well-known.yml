@@ -1,0 +1,125 @@
+generated: '2026-07-31'
+method: probed
+description: >-
+  Results of probing the /.well-known/ discovery surface for every host in apis.yml (Website, Portal,
+  humanURL, baseURL) plus the OpenAPI servers[] host (https://public.api.micro1.ai) and the candidate
+  app host (zara.micro1.ai). Status is the HTTP code observed at fetch time. Only documents that
+  returned a real, correctly-typed payload were saved verbatim. Two false-positive shapes were
+  observed and are recorded rather than saved: public.api.micro1.ai is an AWS API Gateway that answers
+  403 {"message":"Missing Authentication Token"} for every unmatched path, and www.zara.micro1.ai is a
+  single-page app that answers 200 with a text/html shell for every /.well-known/* path. The one real
+  hit is the A2A agent card on the documentation host — captured verbatim in ../a2a/.
+hosts:
+- host: https://ai-recruiter.micro1.ai
+  note: documentation / API-reference host (Mintlify)
+  documents:
+  - path: /.well-known/agent-card.json
+    status: 200
+    type: application/json
+    file: ../a2a/micro1-agent-card.json
+    note: A2A Agent Card — see a2a/micro1-a2a.yml for the grade and evidence.
+  - path: /.well-known/agent-skills/micro1/skill.md
+    status: 200
+    type: text/markdown
+    file: ../skills/micro1-recruiter-skill.md
+    note: >-
+      Provider-published Agent Skill, referenced by the skills[0].url field of the agent card.
+      Saved verbatim.
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+    note: legacy pre-0.3 A2A path — not used; the canonical path is served instead.
+- host: https://public.api.micro1.ai
+  note: >-
+    OpenAPI servers[0] — AWS API Gateway. Returns 403 {"message":"Missing Authentication Token"} for
+    every unmatched path, so no /.well-known/ document is served; the 403s are not access denials to
+    an existing resource.
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/oauth-protected-resource
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+  - path: /.well-known/ai-plugin.json
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+  - path: /.well-known/agent.json
+    status: 403
+- host: https://www.micro1.ai
+  note: marketing site (Webflow) — returns a 404 "Invalid .well-known request" page for every path.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://zara.micro1.ai
+  note: >-
+    Client application / sign-up host. SPA catch-all — answers 200 with a text/html shell for
+    /.well-known/openid-configuration, /oauth-authorization-server, /oauth-protected-resource and
+    /api-catalog. These are NOT discovery documents and were deliberately not saved.
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    type: text/html
+    saved: false
+    reason: SPA HTML shell, not a discovery document
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    type: text/html
+    saved: false
+    reason: SPA HTML shell, not a discovery document
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    type: text/html
+    saved: false
+    reason: SPA HTML shell, not a discovery document
+  - path: /.well-known/api-catalog
+    status: 200
+    type: text/html
+    saved: false
+    reason: SPA HTML shell, not a discovery document
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+summary:
+  security_txt: false
+  openid_configuration: false
+  oauth_authorization_server: false
+  api_catalog: false
+  ai_plugin: false
+  agent_card: true
+  agent_skill: true

@@ -1,0 +1,126 @@
+generated: '2026-07-31'
+method: derived
+source: >-
+  Derived from the request/response schemas and id-reference fields in
+  openapi/micro1-ai-recruiter-openapi.yml (75 component schemas across 18 operations) and the
+  webhook payload fields documented at
+  https://ai-recruiter.micro1.ai/api-reference/getting-started/webhooks/examples.
+description: >-
+  The entity-relationship graph behind micro1's AI Recruiter. Two id namespaces coexist: micro1's own
+  UUID identifiers and the customer's ATS identifiers (ats_job_id, ats_job_application_id), which
+  micro1 stores and echoes back on every applicant and interview event so an external ATS can join.
+  Report ids are the exception to the UUID rule — they are short opaque strings (e.g. h0gqkAcaDJ).
+notation: >-
+  relationships use has_one / has_many / belongs_to with the reference field name; direction is from
+  the entity that owns the reference.
+id_conventions:
+  micro1_ids: UUID v4 (e.g. 123e4567-e89b-12d3-a456-426614174000)
+  report_id: short opaque alphanumeric string (e.g. h0gqkAcaDJ)
+  job_code: 'human-readable job code (e.g. M0000001)'
+  ats_ids: opaque customer-supplied strings, echoed verbatim (ats_job_id, ats_job_application_id)
+entities:
+- name: Interview
+  key: interview_id
+  domain: interview
+  description: >-
+    A reusable AI interview definition — a name, a skill list (max 10), optional custom questions
+    (max 20) and a language. Created once and used for many candidates.
+  source_schemas: [CreateInterviewRequest, CreateInterviewResponse, UpdateInterviewRequest, GetAllInterviewsResponse]
+  fields: [interview_id, interview_name, skills, custom_question_list, interview_language, invite_url]
+- name: Candidate
+  key: candidate_id
+  domain: interview
+  description: A person invited to take an interview.
+  fields: [candidate_id, candidate_name, candidate_email_id]
+- name: Invite
+  key: candidate_id
+  domain: interview
+  description: >-
+    The binding of a candidate to an interview, created by POST /interview/invite. Carries the
+    interview URL delivered to the candidate. Optionally bound to a JobApplicant via
+    job_application_id.
+  source_schemas: [InviteCandidateRequest, InviteCandidateResponse, GetInvitesResponse]
+  fields: [interview_id, candidate_id, job_application_id, disable_email_notification]
+- name: InterviewSession
+  key: session_id
+  domain: interview
+  description: >-
+    One candidate's actual sitting of an interview. Not directly addressable via a CRUD endpoint —
+    it surfaces as session_id on reports and on the interview_report.created webhook. Re-inviting a
+    candidate without candidate_id creates an additional session.
+  fields: [session_id, interview_id, candidate_id, date_started]
+- name: InterviewReport
+  key: report_id
+  domain: evaluation
+  description: >-
+    The evaluation artifact produced 2-5 minutes after a session completes — technical skill ratings,
+    CEFR soft-skill scores, coding and custom-exercise evaluation, custom-question answers,
+    proctoring score and violations, full transcript, and links to the PDF report and recording.
+  source_schemas: [GetInterviewReportsResponse]
+  fields: [report_id, interview_id, session_id, candidate_id, job_applicant_id, report_date,
+    report_url, ai_match_score, proctoring_score, proctoring_violations, interview_transcript,
+    technical_skills_evaluation, soft_skills_evaluation, coding_skills_evaluation,
+    custom_exercise_evaluation, custom_question_evaluation, status]
+- name: InterviewRecording
+  key: report_id
+  domain: evaluation
+  description: >-
+    HLS (.m3u8) screen and webcam recordings of a session plus a hosted player URL. Retrieved by
+    report_id; URLs are time-limited.
+  fields: [report_id, candidate_id, interview_recording_url, interview_recording_player_url,
+    interview_webcam_recording_url, interview_webcam_recording_player_url]
+- name: Job
+  key: job_id
+  domain: hiring
+  description: >-
+    A job posting in micro1, optionally linked to an ATS job and optionally bound to one AI
+    interview. Has an open/closed status and a public apply URL.
+  source_schemas: [GetJobsResponse]
+  fields: [job_id, job_title, job_description, job_code, ats_job_id, interview_id, job_apply_url, job_status]
+- name: JobApplicant
+  key: job_applicant_id
+  domain: hiring
+  description: >-
+    A person who applied to a Job. Carries contact details, a resume URL, an asynchronously computed
+    resume_score, and a pipeline stage. Bridges the customer's ATS application to a micro1 candidate.
+  source_schemas: [CreateJobApplicantRequest, CreateJobApplicantResponse, GetJobApplicantsResponse, GetJobApplicantInfoResponse]
+  fields: [micro1_job_application_id, job_applicant_id, first_name, last_name, email_id,
+    phone_number, resume_url, resume_score, stage, candidate_id, ats_job_application_id, ats_job_id]
+- name: Webhook
+  key: webhook_id
+  domain: platform
+  description: >-
+    A subscription binding one destination URL to exactly one event type. Ten event types are
+    supported; N event types require N Webhook records.
+  source_schemas: [CreateWebhookRequest, CreateWebhookResponse, GetAllWebhooksResponse, UpdateWebhookRequest]
+  fields: [webhook_id, url, description, event]
+- name: Event
+  key: event
+  domain: platform
+  description: >-
+    An outbound webhook delivery, envelope {event, data}. Ten types across four categories. See
+    asyncapi/micro1-webhooks.yml.
+  fields: [event, data]
+relationships:
+- {from: Interview, to: Invite, kind: has_many, via: interview_id}
+- {from: Invite, to: Interview, kind: belongs_to, via: interview_id}
+- {from: Invite, to: Candidate, kind: belongs_to, via: candidate_id}
+- {from: Invite, to: JobApplicant, kind: belongs_to, via: job_application_id, optional: true}
+- {from: Candidate, to: InterviewSession, kind: has_many, via: candidate_id}
+- {from: InterviewSession, to: Interview, kind: belongs_to, via: interview_id}
+- {from: InterviewSession, to: InterviewReport, kind: has_one, via: session_id}
+- {from: InterviewReport, to: Interview, kind: belongs_to, via: interview_id}
+- {from: InterviewReport, to: Candidate, kind: belongs_to, via: candidate_id}
+- {from: InterviewReport, to: JobApplicant, kind: belongs_to, via: job_applicant_id, optional: true}
+- {from: InterviewReport, to: InterviewRecording, kind: has_one, via: report_id}
+- {from: Job, to: JobApplicant, kind: has_many, via: job_id}
+- {from: Job, to: Interview, kind: has_one, via: interview_id, optional: true}
+- {from: JobApplicant, to: Job, kind: belongs_to, via: micro1_job_id}
+- {from: JobApplicant, to: Candidate, kind: has_one, via: candidate_id}
+- {from: Webhook, to: Event, kind: has_many, via: event}
+- {from: Event, to: InterviewReport, kind: references, via: report_id, optional: true}
+- {from: Event, to: JobApplicant, kind: references, via: micro1_job_application_id, optional: true}
+external_join_keys:
+- {field: ats_job_id, entity: Job, description: The customer's ATS job identifier, stored and echoed on events.}
+- {field: ats_job_application_id, entity: JobApplicant, description: The customer's ATS application identifier, stored and echoed on events.}
+docs: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction

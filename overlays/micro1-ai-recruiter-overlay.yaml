@@ -1,0 +1,92 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the micro1 Public API
+  version: 1.0.0
+extends: openapi/micro1-ai-recruiter-openapi.yml
+x-generated: '2026-07-31'
+x-method: generated
+x-source: >-
+  Generated from the harvested spec (https://ai-recruiter.micro1.ai/openapi.json) plus the artifacts
+  derived in this repo. Captures API Evangelist annotations only — the harvested spec is never
+  mutated. Every statement below is grounded in an observed fact recorded in conventions/, errors/,
+  lifecycle/, conformance/, asyncapi/ or security/.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-slug: micro1
+    x-apievangelist-artifacts:
+      authentication: authentication/micro1-authentication.yml
+      conventions: conventions/micro1-conventions.yml
+      errors: errors/micro1-problem-types.yml
+      lifecycle: lifecycle/micro1-lifecycle.yml
+      conformance: conformance/micro1-conformance.yml
+      data_model: data-model/micro1-data-model.yml
+      webhooks: asyncapi/micro1-webhooks.yml
+      agentic_access: agentic-access/micro1-agentic-access.yml
+      mcp: mcp/micro1-mcp.yml
+      agent_card: a2a/micro1-a2a.yml
+      skills: skills/_index.yml
+    x-apievangelist-notes: >-
+      micro1's agent surface (A2A agent card, hosted MCP server, published Agent Skill, llms.txt) is
+      materially ahead of its API surface (no idempotency, no rate-limit signalling, no API
+      versioning, no RFC 9457 errors, no webhook signing, no published compliance program).
+- target: $.info
+  update:
+    x-apievangelist-contract-gaps:
+    - id: no-versioning
+      detail: No version segment, header or date pinning. info.version 1.0.0 is the only marker.
+      evidence: lifecycle/micro1-lifecycle.yml
+    - id: no-idempotency
+      detail: >-
+        No Idempotency-Key on any write. POST /interview/invite and POST /job/{jobId}/applicant
+        duplicate on retry.
+      evidence: conventions/micro1-conventions.yml
+    - id: auth-errors-undeclared
+      detail: >-
+        401 and 403 are documented in prose on the authentication page but declared on zero
+        operations, so generated clients do not model the auth failure path.
+      evidence: errors/micro1-problem-types.yml
+    - id: opaque-operation-ids
+      detail: >-
+        15 of 18 operationIds are UUID-suffixed (aiInterviewer-ce2743c0-2309-41eb-8ff2-...), which
+        generates unusable client method names and unstable agent tool names.
+      evidence: openapi/micro1-ai-recruiter-openapi.yml
+    - id: no-declared-tags-object
+      detail: Operations carry tags but the root tags[] object is absent, so tags have no descriptions.
+      evidence: openapi/micro1-ai-recruiter-openapi.yml
+    - id: uuid-schema-names
+      detail: >-
+        All 75 component schemas are keyed by UUID rather than by name; the human-readable name only
+        appears in the schema `title`. Titles are duplicated wholesale — BadRequestResponse and
+        InternalServerErrorResponse each appear 18 times as 18 separate schemas — so nothing is reused.
+      evidence: openapi/micro1-ai-recruiter-openapi.yml
+    - id: no-webhook-signing
+      detail: No signature or timestamp header documented for webhook deliveries.
+      evidence: asyncapi/micro1-webhooks.yml
+    - id: no-hsts-on-api-host
+      detail: HSTS is present on www and docs hosts but absent on public.api.micro1.ai.
+      evidence: security/micro1-domain-security.yml
+- target: $.info
+  update:
+    x-apievangelist-conventions:
+      response_envelope: '{ status: boolean, message: string, data: object|array }'
+      pagination: {style: offset, params: [page, limit], filter: keyword}
+      auth: {scheme: apiKey, header: x-api-key}
+      idempotency: false
+      rate_limit_headers: false
+- target: $.servers
+  update:
+  - url: https://public.api.micro1.ai
+    description: Production server
+    x-apievangelist-probe:
+      fetched: '2026-07-31'
+      tls: TLSv1.3
+      hsts: false
+      note: >-
+        AWS API Gateway. Unmatched paths return 403 {"message":"Missing Authentication Token"},
+        which is a routing miss rather than an authorization denial.
+- target: $.components.securitySchemes.apiKey
+  update:
+    x-apievangelist-auth-profile: authentication/micro1-authentication.yml
+    x-apievangelist-key-source: micro1 dashboard (client portal)
+    x-apievangelist-undeclared-failures: [401, 403]

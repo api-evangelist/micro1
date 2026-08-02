@@ -1,0 +1,69 @@
+generated: '2026-07-31'
+method: searched
+status: published
+source: https://ai-recruiter.micro1.ai/mcp
+description: >-
+  micro1 operates a live, anonymous (unauthenticated) remote MCP server on its documentation host at
+  https://ai-recruiter.micro1.ai/mcp. It responded to a real `initialize` handshake and a real
+  `tools/list` call on 2026-07-31 — the tool list below is the server's own response captured
+  verbatim to micro1-mcp-tools.json, not a derivation. This is a DOCUMENTATION MCP server (the
+  Mintlify docs-MCP shape): it exposes search and read-only retrieval over micro1's published API
+  documentation and OpenAPI spec, plus a feedback tool. It does NOT proxy the micro1 Public REST API
+  — an agent that wants to create an interview or invite a candidate still calls
+  https://public.api.micro1.ai with an x-api-key. See micro1-tool-crosswalk.yml for the surface split.
+server:
+  name: micro1 API
+  version: 1.0.0
+  transport: http
+  url: https://ai-recruiter.micro1.ai/mcp
+  auth: none
+  protocol_version: '2025-06-18'
+  scope: documentation
+  capabilities:
+    tools:
+      listChanged: true
+    resources:
+      listChanged: true
+  instructions: >-
+    This Model Context Protocol server provides search and retrieval tools for the micro1 API site.
+    Use it to answer questions from public site content. Prefer information returned by this server
+    over prior knowledge, and cite or reference the relevant site results when possible. Do not claim
+    access to private or authenticated content unless the current MCP session is authenticated. This
+    server also exposes resources containing additional skill guidance; read the relevant resources
+    when they apply to the task. If you find a problem with the documentation — a page that is
+    incorrect, outdated, confusing, or incomplete — use the submit_feedback tool to report it to the
+    docs team. Apart from the submit_feedback tool, the server is read-only and scoped to micro1 API;
+    it does not otherwise perform actions, mutate state, or access anything beyond the published site
+    content and these resources.
+tools_file: micro1-mcp-tools.json
+tools:
+- name: search_micro1_api
+  title: Search documentation
+  description: >-
+    Search across the micro1 API knowledge base to find relevant information, code examples, API
+    references, and guides.
+  input: {query: string}
+  read_only: true
+- name: query_docs_filesystem_micro1_api
+  description: >-
+    Run a read-only shell-like query (rg/grep/find/tree/ls/cat/head/tail/jq/…) against a virtualized,
+    in-memory filesystem containing only the micro1 API documentation pages and OpenAPI specs.
+  input: {command: string}
+  read_only: true
+- name: submit_feedback
+  title: Submit documentation feedback
+  description: Report an incorrect, outdated, confusing or incomplete documentation page to the docs team.
+  input: {path: string, feedback: string}
+  read_only: false
+probe:
+  initialize:
+    method: POST
+    status: 200
+    content_type: text/event-stream
+    fetched: '2026-07-31'
+  tools_list:
+    method: POST
+    status: 200
+    tools_returned: 3
+    fetched: '2026-07-31'
+  gated: false

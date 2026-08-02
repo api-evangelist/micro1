@@ -1,0 +1,92 @@
+generated: '2026-07-31'
+method: derived
+source: >-
+  Derived by aligning the live MCP tools/list response (mcp/micro1-mcp-tools.json, fetched
+  2026-07-31 from https://ai-recruiter.micro1.ai/mcp) with the operationIds in
+  openapi/micro1-ai-recruiter-openapi.yml (fetched from https://ai-recruiter.micro1.ai/openapi.json).
+description: >-
+  The headline finding for micro1 is a SURFACE SPLIT, not a mapping. micro1 publishes two agent
+  surfaces and one machine-readable contract, and they do not overlap: the MCP server is scoped to
+  the documentation site (search / read the docs and spec / file a docs bug), while every real
+  capability — create an interview, invite a candidate, pull a report, register a webhook — lives
+  only in the REST API behind an x-api-key. No MCP tool binds to any OpenAPI operation, so
+  crosswalk[] is empty by fact rather than by omission: all three tools are mcp_only and all
+  eighteen operations are rest_only. An agent that wants to *act* on micro1 must call REST directly
+  (or follow the provider-published Agent Skill in ../skills/micro1-recruiter-skill.md, which is the
+  bridge micro1 actually ships between the two surfaces).
+surfaces:
+  openapi:
+    file: openapi/micro1-ai-recruiter-openapi.yml
+    source: https://ai-recruiter.micro1.ai/openapi.json
+    base_url: https://public.api.micro1.ai
+    auth: apiKey header x-api-key
+    operations: 18
+    gated: false
+    note: The spec is anonymously fetchable; calling the operations requires a dashboard-issued key.
+  graphql:
+    present: false
+    note: No /graphql surface found on any micro1 host (probed public.api.micro1.ai and www.micro1.ai).
+  mcp:
+    url: https://ai-recruiter.micro1.ai/mcp
+    manifest: mcp/micro1-mcp.yml
+    tools: 3
+    auth: none
+    gated: false
+    scope: documentation
+    note: Live tools/list returned 200 anonymously; tool inputSchemas are real, not inferred.
+  a2a:
+    agent_card: a2a/micro1-a2a.yml
+    note: >-
+      The agent card advertises the same documentation surface and one Agent Skill whose body
+      documents the REST operations in prose.
+crosswalk: []
+mcp_only:
+- tool: search_micro1_api
+  reason: >-
+    Documentation retrieval, not an API capability. Searches the micro1 docs knowledge base; there
+    is no public REST operation that searches documentation.
+- tool: query_docs_filesystem_micro1_api
+  reason: >-
+    Read-only virtualized filesystem over the docs pages and the OpenAPI spec. Server-side docs
+    tooling with no REST equivalent.
+- tool: submit_feedback
+  reason: >-
+    Files a documentation-quality report with the docs team. The only non-read-only tool on the
+    server, and it has no counterpart in the Public API.
+rest_only:
+- capability: Interview management
+  operations:
+  - {operationId: aiInterviewer, method: post, path: /interview, summary: Create a new interview}
+  - {operationId: aiInterviewer-ce2743c0-2309-41eb-8ff2-44c55c138c25, method: post, path: /custom/interview, summary: Create a new interview (custom questions)}
+  - {operationId: aiInterviewer-34586a03-d777-4757-8c54-f8d7e4c821a5, method: get, path: /interviews, summary: Get all saved interviews}
+  - {operationId: aiInterviewer-6d5d608a-0b31-460d-80b8-a69aa43aac17, method: put, path: '/interview/{interviewId}', summary: Update an interview}
+  - {operationId: aiInterviewer-b7d10a6a-f334-4836-933f-c9a62d33d80b, method: delete, path: '/interview/{interviewId}', summary: Delete an interview}
+  - {operationId: aiInterviewer-2bc90237-ae08-40ae-8d61-08907a167e52, method: post, path: /mock/interview, summary: Preview Questions}
+- capability: Candidate invitation
+  operations:
+  - {operationId: aiInterviewer-08720534-ee71-4a6c-aff1-25c48ed78c6d, method: post, path: /interview/invite, summary: Invite candidates to an interview}
+  - {operationId: aiInterviewer-f690665f-6248-4c86-b317-0f18ebecf728, method: get, path: /interview/invites, summary: Get all invited candidates}
+- capability: Reports and recordings
+  operations:
+  - {operationId: aiInterviewer-c5c30f81-a2b4-45ca-9943-f034683993b0, method: get, path: /interview/reports, summary: Get all completed reports}
+  - {operationId: aiInterviewer-224f9971-cd82-4432-9f9f-8e4f1ba73345, method: get, path: /interview/recording, summary: Get interview recording}
+- capability: Jobs and applicants
+  operations:
+  - {operationId: jobsApplicant, method: get, path: /jobs, summary: Get all jobs}
+  - {operationId: jobsApplicant-c1ce8fbf-390b-412b-9895-d422b21e823e, method: post, path: '/job/{jobId}/applicant', summary: Create a job applicant}
+  - {operationId: jobsApplicant-8934b0b6-90a5-42a4-a5e6-c37d3833718e, method: get, path: '/job/{jobId}/applicants', summary: Get all job applicants}
+  - {operationId: jobsApplicant-e3619770-a47f-4349-838d-a612736b5621, method: get, path: '/job/applicant/{jobApplicantId}', summary: Get Job Applicant Details}
+- capability: Webhook subscriptions
+  operations:
+  - {operationId: webhookSetup, method: post, path: /webhook, summary: Create a webhook}
+  - {operationId: webhookSetup-51ac71f1-e1da-425d-afa2-d527e716b7e6, method: get, path: /webhooks, summary: Get all webhooks}
+  - {operationId: webhookSetup-c050afb6-e424-4a49-81a7-839386c17724, method: put, path: '/webhook/{webhookId}', summary: Update a webhook}
+  - {operationId: webhookSetup-223f3d34-faeb-4c70-91df-a08a2baa2141, method: delete, path: '/webhook/{webhookId}', summary: Delete a webhook}
+coverage:
+  tools_named: 3
+  tools_bound_to_rest: 0
+  mcp_only: 3
+  graphql_only: 0
+  rest_operations_total: 18
+  rest_operations_with_a_tool: 0
+  rest_coverage_pct: 0.0

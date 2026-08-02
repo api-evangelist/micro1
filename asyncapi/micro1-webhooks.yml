@@ -1,0 +1,115 @@
+generated: '2026-07-31'
+method: searched
+source: >-
+  https://ai-recruiter.micro1.ai/api-reference/getting-started/webhooks/introductions and
+  https://ai-recruiter.micro1.ai/api-reference/getting-started/webhooks/examples (event catalog and
+  sample payloads), cross-checked against the CreateWebhookRequest `event` enum in
+  openapi/micro1-ai-recruiter-openapi.yml.
+spec_type: Webhooks
+asyncapi_published: false
+asyncapi_note: >-
+  micro1 publishes NO AsyncAPI document. Probed /asyncapi.yaml and /asyncapi.json on the docs host
+  and the API host — both miss, and nothing in the GitHub search surfaced one. This file is the
+  captured webhook catalog, not a generated AsyncAPI; no AsyncAPI pointer is wired for micro1
+  because none exists.
+description: >-
+  micro1's event surface is outbound HTTP webhooks only — no streaming, no SSE, no message broker.
+  Subscriptions are managed through the Public API (POST /webhook), one subscription per event type.
+transport: https-webhook
+subscription:
+  managed_via_api: true
+  create: {operationId: webhookSetup, method: post, path: /webhook}
+  list: {operationId: webhookSetup-51ac71f1-e1da-425d-afa2-d527e716b7e6, method: get, path: /webhooks}
+  update: {operationId: webhookSetup-c050afb6-e424-4a49-81a7-839386c17724, method: put, path: '/webhook/{webhookId}'}
+  delete: {operationId: webhookSetup-223f3d34-faeb-4c70-91df-a08a2baa2141, method: delete, path: '/webhook/{webhookId}'}
+  one_event_per_subscription: true
+  note: >-
+    CreateWebhookRequest takes a single `event` string (enum), not an array — N event types require
+    N subscriptions.
+envelope:
+  media_type: application/json
+  shape: '{ "event": string, "data": object }'
+  fields:
+  - {field: event, type: string, description: The type of event that triggered the webhook}
+  - {field: data, type: object, description: Event-specific payload}
+delivery:
+  endpoint_requirements: HTTPS and publicly accessible
+  timeout: 30 seconds (documented as the endpoint response budget)
+  signature_header: null
+  signature_note: >-
+    micro1 documents no webhook signing secret, signature header, or timestamp header. Receivers
+    cannot cryptographically verify origin from the published contract.
+  delivery_id_header: null
+  retry_policy: >-
+    Not published. The docs note that slow endpoints "may cause retries or failures" but no backoff
+    schedule, retry count, or replay endpoint is documented.
+  ordering: not guaranteed / not documented
+  idempotency_guidance: >-
+    Dedupe on payload identifiers — report_id for report/recording/proctoring events,
+    micro1_job_application_id for applicant events, interview_id + candidate_id for interview.started.
+events:
+- name: interview.started
+  category: interview
+  description: An interview is started by the candidate.
+  payload_fields: [candidate_id, candidate_name, candidate_email_id, job_id, job_name, ats_job_id,
+    ats_job_application_id, interview_id, interview_name, date_started]
+- name: interview_report.created
+  category: interview
+  description: An interview report is successfully generated after the candidate completes the interview.
+  latency: 2-5 minutes after interview completion (documented)
+  payload_fields: [report_id, interview_id, session_id, interview_name, candidate_id,
+    job_applicant_id, ats_job_application_id, ats_job_id, candidate_name, candidate_email_id,
+    report_date, report_url, interview_recording_url, proctoring_score, ai_match_score,
+    proctoring_violations, interview_transcript, technical_skills_evaluation,
+    soft_skills_evaluation, coding_skills_evaluation, custom_exercise_evaluation,
+    custom_question_evaluation, date_created, date_modified, status]
+- name: interview_recording.completed
+  category: recording
+  description: The interview recording is processed and available.
+  payload_fields: [report_id, candidate_id, interview_recording_url, interview_recording_player_url]
+- name: interview.completed
+  category: interview
+  description: An interview is completed.
+  alias_of: interview_recording.completed
+  note: Documented as the same trigger as interview_recording.completed — subscribe to one, not both.
+- name: interview_webcam_recording.completed
+  category: recording
+  description: The interview webcam recording is processed and available.
+  payload_fields: [report_id, candidate_id, interview_webcam_recording_url,
+    interview_webcam_recording_player_url]
+- name: proctoring_score.completed
+  category: proctoring
+  description: The proctoring score is calculated for a completed interview.
+  payload_fields: [report_id, candidate_id, proctoring_score]
+- name: applicant.created
+  category: applicant
+  description: A new job applicant is created.
+  payload_fields: [resume_score, ats_job_application_id, ats_job_id, micro1_job_id, email_id,
+    micro1_job_application_id, candidate_id, candidate_name, job_name, stage, date_created,
+    date_modified, resume_url]
+- name: applicant.invited
+  category: applicant
+  description: An applicant is invited to an interview.
+  payload_fields: [resume_score, ats_job_application_id, ats_job_id, micro1_job_id, email_id,
+    micro1_job_application_id, candidate_id, candidate_name, job_name, stage, date_created,
+    date_modified, resume_url]
+- name: applicant.updated
+  category: applicant
+  description: An applicant record is updated.
+  payload_fields: [resume_score, ats_job_application_id, ats_job_id, micro1_job_id, email_id,
+    micro1_job_application_id, candidate_id, candidate_name, job_name, stage, date_created,
+    date_modified, resume_url]
+- name: applicant.completed
+  category: applicant
+  description: An applicant's resume is processed and the resume score is generated.
+  payload_fields: [resume_score, ats_job_application_id, ats_job_id, micro1_job_id, email_id,
+    micro1_job_application_id, candidate_id, candidate_name, job_name, stage, date_created,
+    date_modified, resume_url]
+docs:
+  introduction: https://ai-recruiter.micro1.ai/api-reference/getting-started/webhooks/introductions
+  event_types: https://ai-recruiter.micro1.ai/api-reference/getting-started/webhooks/examples
+summary:
+  events: 10
+  distinct_triggers: 9
+  categories: [interview, recording, proctoring, applicant]
+  signed: false

@@ -1,0 +1,98 @@
+generated: '2026-07-31'
+method: derived
+format: custom-envelope
+source: >-
+  Derived from the 4xx/5xx responses across all 18 operations in
+  openapi/micro1-ai-recruiter-openapi.yml (BadRequestResponse / InternalServerErrorResponse schemas),
+  enriched from the authentication error section at
+  https://ai-recruiter.micro1.ai/api-reference/getting-started/authentication and the "Common
+  Gotchas" section of micro1's own published Agent Skill
+  (https://ai-recruiter.micro1.ai/.well-known/agent-skills/micro1/skill.md).
+description: >-
+  micro1 does NOT use RFC 9457 application/problem+json. Every error is returned as the same
+  application/json envelope the success path uses, with `status` flipped to false and a
+  human-readable `message`. There is no machine-readable error code, type URI, or field pointer — a
+  client can only branch on the HTTP status code and, beyond that, string-match the message.
+rfc9457: false
+envelope:
+  media_type: application/json
+  shape: '{ "status": false, "message": string }'
+  fields:
+  - {field: status, type: boolean, description: Whether the request was successful, always false on error}
+  - {field: message, type: string, description: The error message, example "Invalid request"}
+  error_code_field: null
+  field_pointer: null
+coverage:
+  operations: 18
+  operations_declaring_400: 18
+  operations_declaring_500: 18
+  operations_declaring_404: 1
+  operations_declaring_401: 0
+  operations_declaring_403: 0
+  gap: >-
+    401 and 403 are documented in prose on the authentication page but declared on ZERO operations
+    in the OpenAPI. A generated client built from the spec alone will not model the auth failure
+    path. 404 is declared on only one operation (GET /interview/recording) even though ten
+    operations take a path or query id that can miss.
+problems:
+- status: 400
+  title: Bad Request
+  schema: BadRequestResponse
+  meaning: >-
+    The request was unacceptable — a missing required field, an invalid enum value, a malformed
+    identifier, or a limit exceeded (skills max 10, custom questions max 20, question time 1-4 min).
+  example_message: Invalid request
+  declared_on: all 18 operations
+  remediation: >-
+    Validate against the request schema before sending. Interview and webhook ids must be valid
+    UUIDs; the webhook `event` must be one of the ten enum values.
+- status: 401
+  title: Unauthorized
+  meaning: The request was made without a valid API key, or the key was incorrect.
+  example_message: 'Unauthorized: API key is missing or invalid.'
+  source: docs (authentication page)
+  declared_on: no operation in the OpenAPI
+  remediation: Send the x-api-key header with a key issued from the micro1 dashboard.
+- status: 403
+  title: Forbidden
+  meaning: The API key does not have the necessary permissions to access the requested resource.
+  source: docs (authentication page)
+  declared_on: no operation in the OpenAPI
+  remediation: >-
+    Regenerate the key from the dashboard if it has expired; otherwise the key's account does not
+    own the resource being addressed.
+- status: 404
+  title: Not Found
+  meaning: The addressed resource does not exist — e.g. no report matches the supplied report_id.
+  declared_on: 'GET /interview/recording (operationId aiInterviewer-224f9971-cd82-4432-9f9f-8e4f1ba73345)'
+  remediation: >-
+    Confirm the id first with a list operation. Note that interview reports take 2-5 minutes to
+    generate after an interview completes, so an immediately-polled report_id can legitimately miss.
+- status: 500
+  title: Internal Server Error
+  schema: InternalServerErrorResponse
+  meaning: An unexpected error occurred on micro1's side.
+  declared_on: all 18 operations
+  remediation: >-
+    Safe to retry read operations. NOT safe to blind-retry writes — there is no idempotency key, so
+    a retried POST /interview/invite or POST /job/{jobId}/applicant can duplicate the record. Read
+    back before retrying (see conventions/micro1-conventions.yml).
+documented_failure_modes:
+- condition: Interview deleted then re-invited
+  behaviour: Deleted interviews cannot be re-invited.
+  source: provider Agent Skill "Common Gotchas"
+- condition: Malformed candidate email on POST /interview/invite
+  behaviour: Invitations fail silently rather than erroring.
+  source: provider Agent Skill "Common Gotchas"
+  severity: high
+  note: A silent failure is not observable from the HTTP response — verify with GET /interview/invites.
+- condition: Webhook endpoint exceeds ~30s response time
+  behaviour: May cause retries or delivery failures.
+  source: provider Agent Skill "Common Gotchas"
+- condition: Recording URL used after expiry
+  behaviour: Interview recording URLs are time-limited and stop resolving.
+  source: provider Agent Skill "Common Gotchas"
+docs:
+  authentication_errors: https://ai-recruiter.micro1.ai/api-reference/getting-started/authentication
+  error_reference: null
+  note: micro1 publishes no dedicated error-code reference page.

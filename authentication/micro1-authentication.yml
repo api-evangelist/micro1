@@ -1,0 +1,16 @@
+generated: '2026-07-31'
+method: derived
+source: openapi/micro1-ai-recruiter-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  description: API key to access the API
+  sources:
+  - openapi/micro1-ai-recruiter-openapi.yml

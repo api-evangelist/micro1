@@ -1,0 +1,134 @@
+generated: '2026-07-31'
+method: searched
+source: >-
+  https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction,
+  .../getting-started/authentication, .../getting-started/webhooks/introductions and the full docs
+  corpus at https://ai-recruiter.micro1.ai/llms-full.txt; cross-derived from
+  openapi/micro1-ai-recruiter-openapi.yml (securitySchemes, shared query parameters, response
+  schemas).
+description: >-
+  How the micro1 Public API behaves across every operation: authentication style, the response
+  envelope, pagination, filtering, error shape, webhook signalling, and the conventions micro1 does
+  NOT implement. Recorded absences are deliberate and load-bearing — there is no idempotency
+  contract, no rate-limit signalling, no request-id tracing header and no API versioning mechanism
+  in this API, and pretending otherwise would misrepresent the contract an agent has to work against.
+base_url: https://public.api.micro1.ai
+api_style: REST over HTTPS, JSON request bodies, JSON responses
+
+authentication:
+  scheme: API key in a custom request header
+  header: x-api-key
+  key_source: micro1 dashboard (client portal)
+  key_prefix: null
+  oauth: false
+  docs: https://ai-recruiter.micro1.ai/api-reference/getting-started/authentication
+  detail: authentication/micro1-authentication.yml
+  failure_modes:
+  - {status: 401, meaning: request made without a valid API key, or the key was incorrect}
+  - {status: 403, meaning: the API key lacks permission for the requested resource}
+
+response_envelope:
+  supported: true
+  shape: '{ "status": boolean, "message": string, "data": object|array }'
+  description: >-
+    Every documented operation — success and failure alike — returns the same three-field envelope.
+    `status` is a boolean success flag (not an HTTP status), `message` is human-readable, and `data`
+    carries the payload. Agents must check `status` in addition to the HTTP code.
+  evidence: >-
+    openapi component schemas CreateInterviewResponse, GetJobsResponse, GetInterviewReportsResponse,
+    BadRequestResponse, InternalServerErrorResponse.
+
+pagination:
+  style: offset
+  request_params:
+    page: page number
+    limit: page size
+  applies_to: >-
+    The list operations — GET /interviews, GET /interview/invites, GET /interview/reports,
+    GET /jobs, GET /job/{jobId}/applicants.
+  response_fields:
+    data: array of results
+  cursor: false
+  total_count_field: null
+  has_more_field: null
+  note: >-
+    Neither a total count nor a has_more flag is documented, so a client cannot tell it has reached
+    the last page except by receiving a short/empty `data` array.
+
+filtering:
+  free_text:
+    param: keyword
+    applies_to: the same five list operations as pagination
+  by_id:
+    interview_id: GET /interview/reports, GET /interview/invites
+    candidate_id: GET /interview/reports, GET /interview/invites, GET /interview/recording
+    report_id: GET /interview/reports, GET /interview/recording
+    session_id: GET /interview/recording
+
+idempotency:
+  supported: false
+  mechanism: null
+  evidence: >-
+    No Idempotency-Key header or parameter appears anywhere in
+    openapi/micro1-ai-recruiter-openapi.yml, and the docs describe no replay semantics. The
+    provider's own Agent Skill states the opposite risk explicitly: "Inviting the same candidate to
+    the same interview twice creates separate sessions."
+  guidance: >-
+    POST /interview, POST /custom/interview, POST /interview/invite, POST /job/{jobId}/applicant and
+    POST /webhook are all unsafe to blind-retry. Read back first — GET /interview/invites,
+    GET /job/{jobId}/applicants, GET /webhooks — and match on email / URL before creating.
+
+rate_limits:
+  documented: false
+  headers: null
+  note: >-
+    micro1 publishes no rate-limit page and no RateLimit/X-RateLimit response headers appear in the
+    spec. Clients get no quota signal.
+
+request_tracing:
+  request_id_header: null
+  documented: false
+
+versioning:
+  scheme: none
+  current: '1.0.0'
+  mechanism: >-
+    The OpenAPI `info.version` is 1.0.0 but there is no version segment in any path, no version
+    request header, and no date-pinning. Breaking changes would arrive unversioned.
+  detail: lifecycle/micro1-lifecycle.yml
+
+error_envelope:
+  media_type: application/json
+  shape: '{ "status": false, "message": string }'
+  rfc9457: false
+  error_code_field: null
+  note: >-
+    Errors reuse the success envelope with status:false. There is no machine-readable error code or
+    type — clients branch on HTTP status plus a human-readable message string.
+  detail: errors/micro1-problem-types.yml
+
+cors:
+  documented_in_spec: true
+  note: >-
+    Every response in the spec declares Access-Control-Allow-Origin and
+    Access-Control-Allow-Credentials headers.
+
+events:
+  style: outbound HTTPS webhooks, one subscription per event type
+  signed: false
+  detail: asyncapi/micro1-webhooks.yml
+
+sandbox:
+  published: false
+  note: >-
+    micro1 publishes no test mode, no test key prefix, and no magic test identifiers. There is no
+    documented way to exercise the API without creating real interviews. POST /mock/interview
+    (Preview Questions) is the closest safe operation — it returns sample questions for a skill list
+    without creating an interview — but it is a product feature, not a sandbox.
+
+cross_links:
+  authentication: authentication/micro1-authentication.yml
+  errors: errors/micro1-problem-types.yml
+  lifecycle: lifecycle/micro1-lifecycle.yml
+  webhooks: asyncapi/micro1-webhooks.yml
+  data_model: data-model/micro1-data-model.yml
