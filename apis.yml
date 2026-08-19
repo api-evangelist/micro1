@@ -15,7 +15,7 @@ url: https://raw.githubusercontent.com/api-evangelist/micro1/refs/heads/main/api
 image: https://cdn.prod.website-files.com/6a04bd23eb9d40f76dac1249/6a21b7903ec396493b15c2a1_OG%20(52)%20(1).jpg
 x-type: company
 x-source: harvest:secondary-market
-specificationVersion: '0.21'
+specificationVersion: '0.23'
 created: '2026-07-31'
 modified: '2026-07-31'
 tags:
