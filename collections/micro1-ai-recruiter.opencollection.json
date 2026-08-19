@@ -1,0 +1,602 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "micro1 Public API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Interview",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public.api.micro1.ai/interview",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates a new interview, returns a unique interview ID and a corresponding interview URL. You can send this URL to candidates, add it to a job post or alternatively, use the invite candidate endpoint to send invitations for the interview."
+        },
+        {
+          "info": {
+            "name": "Create a new interview (custom questions)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public.api.micro1.ai/custom/interview",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates a new interview with only custom questions, returns a unique interview ID and a corresponding interview URL. You can send this URL to candidates, add it to a job post or alternatively, use the invite candidate endpoint to send invitations for the interview."
+        },
+        {
+          "info": {
+            "name": "Get all saved interviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public.api.micro1.ai/interviews",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query",
+                "description": "Keyword to search for"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint fetches all interviews that have been previously created and saved, such as interviews for specific roles like Full Stack Engineer or LLM Engineer."
+        },
+        {
+          "info": {
+            "name": "Update an interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://public.api.micro1.ai/interview/:interviewId",
+            "params": [
+              {
+                "name": "interviewId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the interview to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint updates an existing interview by ID."
+        },
+        {
+          "info": {
+            "name": "Delete an interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://public.api.micro1.ai/interview/:interviewId",
+            "params": [
+              {
+                "name": "interviewId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the interview to delete"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes an existing interview by ID."
+        },
+        {
+          "info": {
+            "name": "Preview Questions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public.api.micro1.ai/mock/interview",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves a sample interview question based on the provided skills and their descriptions. It helps you understand the type of questions tailored by AI interviews based on the skills provided."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Invite Candidate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Invite candidates to an interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public.api.micro1.ai/interview/invite",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint emails candidates to take the interview, returns the candidate ID, and interview URL. The candidates will then take the interview on our platform before you can receive the report data."
+        },
+        {
+          "info": {
+            "name": "Get all invited candidates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public.api.micro1.ai/interview/invites",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query",
+                "description": "Keyword to search for"
+              },
+              {
+                "name": "interview_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the interview"
+              },
+              {
+                "name": "candidate_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the candidate"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves all sent invites. You can search for a specific candidate, keyword or interview."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Interview Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all completed reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public.api.micro1.ai/interview/reports",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query",
+                "description": "Keyword to search for"
+              },
+              {
+                "name": "interview_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the interview"
+              },
+              {
+                "name": "candidate_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the candidate"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves reports for candidates who have completed their AI interviews. You can filter the reports by Interview ID, Candidate ID or Report ID."
+        },
+        {
+          "info": {
+            "name": "Get interview recording",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public.api.micro1.ai/interview/recording",
+            "params": [
+              {
+                "name": "report_id",
+                "value": "",
+                "type": "query",
+                "description": "Main report ID for the completed interview"
+              },
+              {
+                "name": "candidate_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the candidate"
+              },
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the interview session"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns interview recording data for a completed report. Requires report_id; resolves session from your account and proxies the internal recording service response, including any Set-Cookie headers from that service."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Job",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public.api.micro1.ai/jobs",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query",
+                "description": "Keyword to search for"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve all jobs via this endpoint."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Job Applicant",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a job applicant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public.api.micro1.ai/job/:jobId/applicant",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the job"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a job applicant for a specific job via this endpoint."
+        },
+        {
+          "info": {
+            "name": "Get all job applicants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public.api.micro1.ai/job/:jobId/applicants",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the job"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "keyword",
+                "value": "",
+                "type": "query",
+                "description": "Keyword to search for"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve all job applicants for a specific job via this endpoint."
+        },
+        {
+          "info": {
+            "name": "Get Job Applicant Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public.api.micro1.ai/job/applicant/:jobApplicantId",
+            "params": [
+              {
+                "name": "jobApplicantId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the Job Applicant"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Retrieve job applicant details via this endpoint."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhook",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://public.api.micro1.ai/webhook",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint sets up a webhook for the AI Recruiter. It allows you to receive notifications, such as interview results, when a candidate completes the interview and the report is generated."
+        },
+        {
+          "info": {
+            "name": "Get all webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://public.api.micro1.ai/webhooks",
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint fetches all configured webhooks."
+        },
+        {
+          "info": {
+            "name": "Update a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://public.api.micro1.ai/webhook/:webhookId",
+            "params": [
+              {
+                "name": "webhookId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the webhook to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint updates a webhook by ID."
+        },
+        {
+          "info": {
+            "name": "Delete a webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://public.api.micro1.ai/webhook/:webhookId",
+            "params": [
+              {
+                "name": "webhookId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the webhook to delete"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes a webhook by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
