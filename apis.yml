@@ -20,6 +20,19 @@ created: '2026-07-31'
 modified: '2026-07-31'
 tags:
 - Company
+- Recruiting
+- Hiring
+- AI Interviews
+- Talent Assessment
+- Candidate Screening
+- Applicant Tracking
+- Human Resources
+- Proctoring
+- Webhook
+- agent-native
+- AI Training Data
+tags_raw:
+- Company
 - recruiting
 - hiring
 - ai-interviews
@@ -43,6 +56,15 @@ apis:
   humanURL: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
   baseURL: https://public.api.micro1.ai
   tags:
+  - Recruiting
+  - Hiring
+  - AI Interviews
+  - Talent Assessment
+  - Candidate Screening
+  - Applicant Tracking
+  - Proctoring
+  - Webhook
+  tags_raw:
   - recruiting
   - hiring
   - ai-interviews
