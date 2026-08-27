@@ -45,39 +45,16 @@ tags_raw:
 - agent-native
 - ai-training-data
 apis:
-- name: micro1 Public API
-  description: >-
-    The micro1 AI Recruiter public REST API. Create conversational AI interviews from a skill list (or
-    from your own custom questions), preview the questions the AI will ask, invite candidates by email,
-    list jobs and job applicants, pull completed interview reports (per-skill technical ratings, soft
-    skills, coding evaluation, proctoring score and violations, full transcript) and interview
-    recordings, and manage webhook subscriptions for the platform's nine event types. Authenticated
-    with an `x-api-key` header issued from the micro1 dashboard.
+- aid: micro1:micro1-interview-api
+  name: micro1 Interview API
+  description: The Interview API from micro1 — 5 operation(s) for interview.
   humanURL: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
   baseURL: https://public.api.micro1.ai
   tags:
-  - Recruiting
-  - Hiring
-  - AI Interviews
-  - Talent Assessment
-  - Candidate Screening
-  - Applicant Tracking
-  - Proctoring
-  - Webhook
-  tags_raw:
-  - recruiting
-  - hiring
-  - ai-interviews
-  - talent-assessment
-  - candidate-screening
-  - applicant-tracking
-  - proctoring
-  - webhooks
+  - Interview
   properties:
   - type: OpenAPI
-    url: openapi/micro1-ai-recruiter-openapi.yml
-  - type: OpenAPI
-    url: openapi/_original/micro1-ai-recruiter-openapi-original.json
+    url: openapi/micro1-interview-api-openapi.yml
   - type: Documentation
     url: https://ai-recruiter.micro1.ai/
   - type: APIReference
@@ -94,10 +71,146 @@ apis:
     url: data-model/micro1-data-model.yml
   - type: Webhooks
     url: asyncapi/micro1-webhooks.yml
-  - type: Overlay
-    url: overlays/micro1-ai-recruiter-overlay.yaml
-  - type: MCPServer
-    url: mcp/micro1-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/micro1-tool-crosswalk.yml
+- aid: micro1:micro1-interview-reports-api
+  name: micro1 Interview Reports API
+  description: The Interview Reports API from micro1 — 2 operation(s) for interview reports.
+  humanURL: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  baseURL: https://public.api.micro1.ai
+  tags:
+  - Interview Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/micro1-interview-reports-api-openapi.yml
+  - type: Documentation
+    url: https://ai-recruiter.micro1.ai/
+  - type: APIReference
+    url: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  - type: GettingStarted
+    url: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  - type: Authentication
+    url: authentication/micro1-authentication.yml
+  - type: Conventions
+    url: conventions/micro1-conventions.yml
+  - type: ErrorCatalog
+    url: errors/micro1-problem-types.yml
+  - type: DataModel
+    url: data-model/micro1-data-model.yml
+  - type: Webhooks
+    url: asyncapi/micro1-webhooks.yml
+  - type: ToolCrosswalk
+    url: mcp/micro1-tool-crosswalk.yml
+- aid: micro1:micro1-invite-candidate-api
+  name: micro1 Invite Candidate API
+  description: The Invite Candidate API from micro1 — 2 operation(s) for invite candidate.
+  humanURL: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  baseURL: https://public.api.micro1.ai
+  tags:
+  - Invite Candidate
+  properties:
+  - type: OpenAPI
+    url: openapi/micro1-invite-candidate-api-openapi.yml
+  - type: Documentation
+    url: https://ai-recruiter.micro1.ai/
+  - type: APIReference
+    url: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  - type: GettingStarted
+    url: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  - type: Authentication
+    url: authentication/micro1-authentication.yml
+  - type: Conventions
+    url: conventions/micro1-conventions.yml
+  - type: ErrorCatalog
+    url: errors/micro1-problem-types.yml
+  - type: DataModel
+    url: data-model/micro1-data-model.yml
+  - type: Webhooks
+    url: asyncapi/micro1-webhooks.yml
+  - type: ToolCrosswalk
+    url: mcp/micro1-tool-crosswalk.yml
+- aid: micro1:micro1-job-api
+  name: micro1 Job API
+  description: The Job API from micro1 — 1 operation(s) for job.
+  humanURL: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  baseURL: https://public.api.micro1.ai
+  tags:
+  - Job
+  properties:
+  - type: OpenAPI
+    url: openapi/micro1-job-api-openapi.yml
+  - type: Documentation
+    url: https://ai-recruiter.micro1.ai/
+  - type: APIReference
+    url: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  - type: GettingStarted
+    url: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  - type: Authentication
+    url: authentication/micro1-authentication.yml
+  - type: Conventions
+    url: conventions/micro1-conventions.yml
+  - type: ErrorCatalog
+    url: errors/micro1-problem-types.yml
+  - type: DataModel
+    url: data-model/micro1-data-model.yml
+  - type: Webhooks
+    url: asyncapi/micro1-webhooks.yml
+  - type: ToolCrosswalk
+    url: mcp/micro1-tool-crosswalk.yml
+- aid: micro1:micro1-job-applicant-api
+  name: micro1 Job Applicant API
+  description: The Job Applicant API from micro1 — 3 operation(s) for job applicant.
+  humanURL: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  baseURL: https://public.api.micro1.ai
+  tags:
+  - Job Applicant
+  properties:
+  - type: OpenAPI
+    url: openapi/micro1-job-applicant-api-openapi.yml
+  - type: Documentation
+    url: https://ai-recruiter.micro1.ai/
+  - type: APIReference
+    url: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  - type: GettingStarted
+    url: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  - type: Authentication
+    url: authentication/micro1-authentication.yml
+  - type: Conventions
+    url: conventions/micro1-conventions.yml
+  - type: ErrorCatalog
+    url: errors/micro1-problem-types.yml
+  - type: DataModel
+    url: data-model/micro1-data-model.yml
+  - type: Webhooks
+    url: asyncapi/micro1-webhooks.yml
+  - type: ToolCrosswalk
+    url: mcp/micro1-tool-crosswalk.yml
+- aid: micro1:micro1-webhook-api
+  name: micro1 Webhook API
+  description: The Webhook API from micro1 — 3 operation(s) for webhook.
+  humanURL: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  baseURL: https://public.api.micro1.ai
+  tags:
+  - Webhook
+  properties:
+  - type: OpenAPI
+    url: openapi/micro1-webhook-api-openapi.yml
+  - type: Documentation
+    url: https://ai-recruiter.micro1.ai/
+  - type: APIReference
+    url: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  - type: GettingStarted
+    url: https://ai-recruiter.micro1.ai/api-reference/getting-started/introduction
+  - type: Authentication
+    url: authentication/micro1-authentication.yml
+  - type: Conventions
+    url: conventions/micro1-conventions.yml
+  - type: ErrorCatalog
+    url: errors/micro1-problem-types.yml
+  - type: DataModel
+    url: data-model/micro1-data-model.yml
+  - type: Webhooks
+    url: asyncapi/micro1-webhooks.yml
   - type: ToolCrosswalk
     url: mcp/micro1-tool-crosswalk.yml
 maintainers:
