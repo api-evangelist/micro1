@@ -1,0 +1,366 @@
+openapi: 3.2.0
+info:
+  title: micro1 Public Invite Candidate API
+  description: micro1 ai-interview platform public API
+  version: 1.0.0
+  termsOfService: https://www.micro1.ai/terms-conditions
+  contact:
+    name: micro1 API Support
+    url: https://www.micro1.ai
+    email: support@micro1.ai
+servers:
+- url: https://public.api.micro1.ai
+  description: Production server
+security:
+- apiKey: []
+tags:
+- name: Invite Candidate
+paths:
+  /interview/invite:
+    post:
+      summary: Invite candidates to an interview
+      description: This endpoint emails candidates to take the interview, returns the candidate ID, and interview URL. The candidates will then take the interview on our platform before you can receive the report data.
+      operationId: aiInterviewer-08720534-ee71-4a6c-aff1-25c48ed78c6d
+      parameters: []
+      tags:
+      - Invite Candidate
+      security:
+      - apiKey: []
+      requestBody:
+        description: Request body to create an interview
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/c93fc8b1-3071-4de0-8f00-c22c8ac342e8'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/082583f8-9260-4b46-b8bc-04c7a44fded2'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d24a9b8f-c64f-4661-9bfb-6b0874f15289'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/22038d2e-01bd-4d14-8751-a35ace89f2f0'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+  /interview/invites:
+    get:
+      summary: Get all invited candidates
+      description: This endpoint retrieves all sent invites. You can search for a specific candidate, keyword or interview.
+      operationId: aiInterviewer-f690665f-6248-4c86-b317-0f18ebecf728
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          $ref: '#/components/schemas/page'
+      - name: limit
+        in: query
+        description: Number of items per page
+        required: false
+        schema:
+          $ref: '#/components/schemas/limit'
+      - name: keyword
+        in: query
+        description: Keyword to search for
+        required: false
+        schema:
+          $ref: '#/components/schemas/keyword'
+      - name: interview_id
+        in: query
+        description: ID of the interview
+        required: false
+        schema:
+          $ref: '#/components/schemas/interview_id'
+      - name: candidate_id
+        in: query
+        description: ID of the candidate
+        required: false
+        schema:
+          $ref: '#/components/schemas/candidate_id'
+      tags:
+      - Invite Candidate
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ed1324fa-97e3-4327-989a-1365796365ff'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/19f58cbb-0a5c-4362-9543-e11ecc14b188'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/48ed7e9b-d5c0-4cac-a7f7-554cf2d38a61'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+components:
+  schemas:
+    page:
+      type: integer
+    48ed7e9b-d5c0-4cac-a7f7-554cf2d38a61:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    interview_id:
+      type: string
+    ed1324fa-97e3-4327-989a-1365796365ff:
+      title: GetInvitesResponse
+      description: Response for getting all candidate invites
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Status of the response
+          example: 'true'
+        message:
+          type: string
+          description: Message of the response
+          example: Candidate invites fetched successfully
+        data:
+          type: array
+          description: List of candidate invites
+          items:
+            title: Report
+            type: object
+            properties:
+              candidate_id:
+                type: string
+                description: ID of the candidate
+                example: h0gqkAcaDJ
+              interview_id:
+                type: string
+                description: ID of the interview
+                example: 123e4567-e89b-12d3-a456-426614174000
+              interview_name:
+                type: string
+                description: Name of the interview
+                example: Full Stack Engineer Interview
+              candidate_name:
+                type: string
+                description: Name of the candidate
+                example: John Doe
+              candidate_email_id:
+                type: string
+                description: Email of the candidate
+                example: john.doe@micro1.ai
+              date_created:
+                type: string
+                description: Date created of the report
+                example: '2021-01-01 00:00:00'
+              date_modified:
+                type: string
+                description: Date modified of the report
+                example: '2021-01-01 00:00:00'
+              status:
+                type: string
+                description: Status of the report
+                example: active
+    limit:
+      type: integer
+    d24a9b8f-c64f-4661-9bfb-6b0874f15289:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    22038d2e-01bd-4d14-8751-a35ace89f2f0:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    Access-Control-Allow-Origin:
+      type: string
+      default: '*'
+      example: https://developer.mozilla.org
+    c93fc8b1-3071-4de0-8f00-c22c8ac342e8:
+      title: InviteCandidateRequest
+      type: object
+      required:
+      - interview_id
+      properties:
+        interview_id:
+          type: string
+          description: The ID of the interview to invite candidates to
+          example: 123e4567-e89b-12d3-a456-426614174000
+        candidates:
+          type: array
+          items:
+            type: object
+            required:
+            - name
+            - email
+            properties:
+              name:
+                type: string
+                description: The name of the candidate to invite
+                example: John Doe
+              email:
+                type: string
+                description: The email of the candidate to invite
+                example: candidate@example.com
+          description: The list of candidates to invite
+          example:
+          - name: John Doe
+            email: candidate@example.com
+        job_application_id:
+          type: string
+          description: The ID of the job application to invite candidates (Optional)
+          example: 123e4567-e89b-12d3-a456-426614174000
+        candidate_id:
+          type: string
+          description: The ID of the candidate to re-send the invitation (Optional)
+          example: 123e4567-e89b-12d3-a456-426614174000
+        disable_email_notification:
+          type: boolean
+          description: Whether to disable the email notification sent to the candidate for the interview invitation
+          example: false
+          default: false
+    082583f8-9260-4b46-b8bc-04c7a44fded2:
+      title: InviteCandidateResponse
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: The status of the invitation
+          example: true
+        message:
+          type: string
+          description: The message of the invitation
+          example: Invitations sent successfully
+        data:
+          type: object
+          description: The data of the invitation
+          properties:
+            invitations:
+              type: array
+              description: Invitation details of the candidates
+              items:
+                type: object
+                description: Invitation details of the candidate
+                properties:
+                  candidate_id:
+                    type: string
+                    description: The ID of the candidate
+                    example: 123e4567-e89b-12d3-a456-426614174000
+                  candidate_email:
+                    type: string
+                    description: The email of the candidate
+                    example: candidate@example.com
+                  invite_url:
+                    type: string
+                    description: The URL of the invitation
+                    example: https://interview.micro1.ai/intro/micro1?cid=123e4567-e89b-12d3-a456-426614174000
+    candidate_id:
+      type: string
+    keyword:
+      type: string
+    Access-Control-Allow-Credentials:
+      type: boolean
+      default: true
+    19f58cbb-0a5c-4362-9543-e11ecc14b188:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+  securitySchemes:
+    apiKey:
+      description: API key to access the API
+      type: apiKey
+      name: x-api-key
+      in: header

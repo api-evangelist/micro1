@@ -1,0 +1,762 @@
+openapi: 3.2.0
+info:
+  title: micro1 Public Job Applicant API
+  description: micro1 ai-interview platform public API
+  version: 1.0.0
+  termsOfService: https://www.micro1.ai/terms-conditions
+  contact:
+    name: micro1 API Support
+    url: https://www.micro1.ai
+    email: support@micro1.ai
+servers:
+- url: https://public.api.micro1.ai
+  description: Production server
+security:
+- apiKey: []
+tags:
+- name: Job Applicant
+paths:
+  /job/{jobId}/applicant:
+    post:
+      summary: Create a job applicant
+      description: Create a job applicant for a specific job via this endpoint.
+      operationId: jobsApplicant-c1ce8fbf-390b-412b-9895-d422b21e823e
+      parameters:
+      - name: jobId
+        in: path
+        description: ID of the job
+        required: true
+        schema:
+          $ref: '#/components/schemas/jobId'
+      tags:
+      - Job Applicant
+      security:
+      - apiKey: []
+      requestBody:
+        description: Request body to create a job applicant
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/e486e318-d331-48d4-91f8-e6df3799e17f'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/5ce136f1-27c7-4a91-8e56-6b91df2ba637'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/365af817-7df6-4481-882f-076637a891f4'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/96c81713-d1a0-41f9-bb10-ae3954fe2fcc'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+  /job/{jobId}/applicants:
+    get:
+      summary: Get all job applicants
+      description: Retrieve all job applicants for a specific job via this endpoint.
+      operationId: jobsApplicant-8934b0b6-90a5-42a4-a5e6-c37d3833718e
+      parameters:
+      - name: jobId
+        in: path
+        description: ID of the job
+        required: true
+        schema:
+          $ref: '#/components/schemas/jobId'
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          $ref: '#/components/schemas/page'
+      - name: limit
+        in: query
+        description: Number of items per page
+        required: false
+        schema:
+          $ref: '#/components/schemas/limit'
+      - name: keyword
+        in: query
+        description: Keyword to search for
+        required: false
+        schema:
+          $ref: '#/components/schemas/keyword'
+      tags:
+      - Job Applicant
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/f4b606ec-833f-484c-9e92-ec71fa6d0227'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/251cb858-d370-4f1b-9c5c-0c081a89c85e'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/5e620761-46f4-4384-8a4d-548a7120e1db'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+  /job/applicant/{jobApplicantId}:
+    get:
+      summary: Get Job Applicant Details
+      description: Retrieve job applicant details via this endpoint.
+      operationId: jobsApplicant-e3619770-a47f-4349-838d-a612736b5621
+      parameters:
+      - name: jobApplicantId
+        in: path
+        description: ID of the Job Applicant
+        required: true
+        schema:
+          $ref: '#/components/schemas/jobApplicantId'
+      tags:
+      - Job Applicant
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ab74bc6e-7117-48e4-8eae-64467adf1fc7'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/6387c5db-664c-4960-bfad-e8d8320cc9c3'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/7c8f408f-2c68-459f-9c57-e928856cbbcd'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+components:
+  schemas:
+    e486e318-d331-48d4-91f8-e6df3799e17f:
+      title: CreateJobApplicantRequest
+      type: object
+      required:
+      - first_name
+      - last_name
+      - email_id
+      properties:
+        first_name:
+          type: string
+          description: First name of the candidate
+          example: John
+        last_name:
+          type: string
+          description: Last name of the candidate
+          example: Doe
+        email_id:
+          type: string
+          description: Email of the candidate
+          example: john.doe@micro1.ai
+        phone_number:
+          type: string
+          description: Phone number of the candidate
+          example: '+1234567890'
+        resume_url:
+          type: string
+          description: URL of the resume (PDF or DOCX file)
+          example: https://micro1.ai/resume/h0gqkAcaDJ.pdf
+    5e620761-46f4-4384-8a4d-548a7120e1db:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    ab74bc6e-7117-48e4-8eae-64467adf1fc7:
+      title: GetJobApplicantInfoResponse
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Status of the response
+        message:
+          type: string
+          description: Message of the response
+        data:
+          type: object
+          description: Data of the response
+          title: Job Applicant
+          properties:
+            job_applicant_id:
+              type: string
+              description: ID of the job applicant
+              example: 123e4567-e89b-12d3-a456-426614174000
+            job_id:
+              type: string
+              description: ID of the job
+              example: 123e4567-e89b-12d3-a456-426614174000
+            job_title:
+              type: string
+              description: Title of the job
+              example: Full Stack Engineer
+            first_name:
+              type: string
+              description: First name of the candidate
+              example: John
+            last_name:
+              type: string
+              description: Last name of the candidate
+              example: Doe
+            email_id:
+              type: string
+              description: Email of the candidate
+              example: john.doe@micro1.ai
+            phone_number:
+              type: string
+              description: Phone number of the candidate
+              example: '+1234567890'
+            phone_country_iso_code:
+              type: string
+              description: Phone country code of the candidate
+              example: US
+            resume_url:
+              type: string
+              description: URL of the resume
+              example: https://micro1.ai/resume/h0gqkAcaDJ.pdf
+            linkedin_url:
+              type: string
+              description: URL of the linkedin profile
+              example: https://www.linkedin.com/in/john-doe-1234567890
+            source_name:
+              type: string
+              description: Source of the candidate
+              example: Linkedin
+            resume_score:
+              type: number
+              description: Score of the resume
+              example: 85
+            parsed_resume_data:
+              type:
+              - object
+              - 'null'
+              description: Parsed resume data
+              properties:
+                education:
+                  type: array
+                  description: Education of the candidate
+                  items:
+                    type: object
+                    properties:
+                      degree:
+                        type: string
+                        description: Degree of the education
+                        example: Bachelor of Science
+                      major:
+                        type: string
+                        description: Major/field of study
+                        example: Computer Science
+                      university_name:
+                        type: string
+                        description: University or institution name
+                        example: University of California, Los Angeles
+                      start_date:
+                        type: string
+                        description: Start date of the education
+                        example: '2021-10-01'
+                      end_date:
+                        type: string
+                        description: End date of the education
+                        example: '2022-06-30'
+                      is_present:
+                        type: boolean
+                        description: Whether the candidate is currently studying
+                        example: false
+                  example:
+                  - major: Computer Science
+                    degree: Bachelor of Science
+                    end_date: '2022-06-30'
+                    is_present: false
+                    start_date: '2021-10-01'
+                    university_name: University of California, Los Angeles
+                  - major: Computer Science
+                    degree: Master of Science
+                    end_date: null
+                    is_present: true
+                    start_date: '2022-09-01'
+                    university_name: University of California, Los Angeles
+                experience:
+                  type: array
+                  description: Experience of the candidate
+                  items:
+                    type: object
+                    properties:
+                      company_name:
+                        type: string
+                        description: Company name of the experience
+                        example: micro1
+                      role:
+                        type: string
+                        description: Role/position of the candidate
+                        example: Software Engineer
+                      start_date:
+                        type: string
+                        description: Start date of the experience
+                        example: '2022-01-01'
+                      end_date:
+                        type:
+                        - string
+                        - 'null'
+                        description: End date of the experience
+                        example: null
+                      is_present:
+                        type: boolean
+                        description: Whether the candidate is currently working at this position
+                        example: true
+                      tech_stack:
+                        type: array
+                        description: Technologies used in this role
+                        items:
+                          type: string
+                        example:
+                        - Selenium
+                        - Cypress
+                        - Playwright
+                        - TestCafe
+                        - JUnit
+                        - TestNG
+                        - BDD (Cucumber)
+                        - Appium
+                        - RestAssured
+                      responsibilities:
+                        type: string
+                        description: Job responsibilities and duties
+                        example: <ul><li>Designed, developed, and executed automated tests for software applications.</li><li>Collaborated with the development team to ensure the software met quality standards.</li><li>Troubleshot test failures and identified root causes.</li><li>Automated manual testing tasks.</li><li>Worked with other engineers to improve the test automation framework.</li><li>Stayed up-to-date on the latest testing technologies.</li></ul>
+                  example:
+                  - role: Software Engineer
+                    end_date: null
+                    is_present: true
+                    start_date: '2022-01-01'
+                    tech_stack:
+                    - React.js
+                    - Node.js
+                    - Express.js
+                    - MongoDB
+                    - PostgreSQL
+                    - Docker
+                    - Kubernetes
+                    company_name: micro1
+                    responsibilities: <ul><li>Developed and maintained web applications using React.js and Node.js.</li><li>Implemented RESTful APIs using Express.js and MongoDB.</li><li>Collaborated with the development team to ensure the software met quality standards.</li><li>Troubleshot test failures and identified root causes.</li><li>Automated manual testing tasks.</li><li>Worked with other engineers to improve the test automation framework.</li><li>Stayed up-to-date on the latest testing technologies.</li></ul>
+            screening_question_answers:
+              type:
+              - array
+              - 'null'
+              description: Answers to the screening questions
+              items:
+                type: object
+                properties:
+                  question:
+                    type: string
+                    description: Question of the screening question
+                    example: What is your experience with React.js?
+                  answer:
+                    type: string
+                    description: Answer to the screening question
+                    example: I have 3 years of experience with React.js
+            date_created:
+              type: string
+              description: Date created of the report
+              example: '2021-01-01 00:00:00'
+            date_modified:
+              type: string
+              description: Date modified of the report
+              example: '2021-01-01 00:00:00'
+            status:
+              type: string
+              description: Status of the report
+              example: active
+    251cb858-d370-4f1b-9c5c-0c081a89c85e:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    limit:
+      type: integer
+    f4b606ec-833f-484c-9e92-ec71fa6d0227:
+      title: GetJobApplicantsResponse
+      description: Response for getting all job applicants
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Status of the response
+          example: true
+        message:
+          type: string
+          description: Message of the response
+          example: Job applicants fetched successfully
+        data:
+          type: array
+          description: List of job applicants
+          items:
+            title: Job Applicant
+            type: object
+            properties:
+              job_applicant_id:
+                type: string
+                description: ID of the job applicant
+                example: 123e4567-e89b-12d3-a456-426614174000
+              job_id:
+                type: string
+                description: ID of the job
+                example: 123e4567-e89b-12d3-a456-426614174000
+              job_title:
+                type: string
+                description: Title of the job
+                example: Full Stack Engineer
+              first_name:
+                type: string
+                description: First name of the candidate
+                example: John
+              last_name:
+                type: string
+                description: Last name of the candidate
+                example: Doe
+              email_id:
+                type: string
+                description: Email of the candidate
+                example: john.doe@micro1.ai
+              phone_number:
+                type: string
+                description: Phone number of the candidate
+                example: '+1234567890'
+              phone_country_iso_code:
+                type: string
+                description: Phone country code of the candidate
+                example: US
+              resume_url:
+                type: string
+                description: URL of the resume
+                example: https://micro1.ai/resume/h0gqkAcaDJ.pdf
+              linkedin_url:
+                type: string
+                description: URL of the linkedin profile
+                example: https://www.linkedin.com/in/john-doe-1234567890
+              source_name:
+                type: string
+                description: Source of the candidate
+                example: Linkedin
+              resume_score:
+                type: number
+                description: Score of the resume
+                example: 85
+              parsed_resume_data:
+                type:
+                - object
+                - 'null'
+                description: Parsed resume data
+                properties:
+                  education:
+                    type: array
+                    description: Education of the candidate
+                    items:
+                      type: object
+                      properties:
+                        degree:
+                          type: string
+                          description: Degree of the education
+                          example: Bachelor of Science
+                        major:
+                          type: string
+                          description: Major/field of study
+                          example: Computer Science
+                        university_name:
+                          type: string
+                          description: University or institution name
+                          example: University of California, Los Angeles
+                        start_date:
+                          type: string
+                          description: Start date of the education
+                          example: '2021-10-01'
+                        end_date:
+                          type: string
+                          description: End date of the education
+                          example: '2022-06-30'
+                        is_present:
+                          type: boolean
+                          description: Whether the candidate is currently studying
+                          example: false
+                    example:
+                    - major: Computer Science
+                      degree: Bachelor of Science
+                      end_date: '2022-06-30'
+                      is_present: false
+                      start_date: '2021-10-01'
+                      university_name: University of California, Los Angeles
+                    - major: Computer Science
+                      degree: Master of Science
+                      end_date: null
+                      is_present: true
+                      start_date: '2022-09-01'
+                      university_name: University of California, Los Angeles
+                  experience:
+                    type: array
+                    description: Experience of the candidate
+                    items:
+                      type: object
+                      properties:
+                        company_name:
+                          type: string
+                          description: Company name of the experience
+                          example: micro1
+                        role:
+                          type: string
+                          description: Role/position of the candidate
+                          example: Software Engineer
+                        start_date:
+                          type: string
+                          description: Start date of the experience
+                          example: '2022-01-01'
+                        end_date:
+                          type:
+                          - string
+                          - 'null'
+                          description: End date of the experience
+                          example: null
+                        is_present:
+                          type: boolean
+                          description: Whether the candidate is currently working at this position
+                          example: true
+                        tech_stack:
+                          type: array
+                          description: Technologies used in this role
+                          items:
+                            type: string
+                          example:
+                          - Selenium
+                          - Cypress
+                          - Playwright
+                          - TestCafe
+                          - JUnit
+                          - TestNG
+                          - BDD (Cucumber)
+                          - Appium
+                          - RestAssured
+                        responsibilities:
+                          type: string
+                          description: Job responsibilities and duties
+                          example: <ul><li>Designed, developed, and executed automated tests for software applications.</li><li>Collaborated with the development team to ensure the software met quality standards.</li><li>Troubleshot test failures and identified root causes.</li><li>Automated manual testing tasks.</li><li>Worked with other engineers to improve the test automation framework.</li><li>Stayed up-to-date on the latest testing technologies.</li></ul>
+                    example:
+                    - role: Software Engineer
+                      end_date: null
+                      is_present: true
+                      start_date: '2022-01-01'
+                      tech_stack:
+                      - React.js
+                      - Node.js
+                      - Express.js
+                      - MongoDB
+                      - PostgreSQL
+                      - Docker
+                      - Kubernetes
+                      company_name: micro1
+                      responsibilities: <ul><li>Developed and maintained web applications using React.js and Node.js.</li><li>Implemented RESTful APIs using Express.js and MongoDB.</li><li>Collaborated with the development team to ensure the software met quality standards.</li><li>Troubleshot test failures and identified root causes.</li><li>Automated manual testing tasks.</li><li>Worked with other engineers to improve the test automation framework.</li><li>Stayed up-to-date on the latest testing technologies.</li></ul>
+              date_created:
+                type: string
+                description: Date created of the report
+                example: '2021-01-01 00:00:00'
+              date_modified:
+                type: string
+                description: Date modified of the report
+                example: '2021-01-01 00:00:00'
+              status:
+                type: string
+                description: Status of the report
+                example: active
+    jobApplicantId:
+      type: string
+    7c8f408f-2c68-459f-9c57-e928856cbbcd:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    96c81713-d1a0-41f9-bb10-ae3954fe2fcc:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    5ce136f1-27c7-4a91-8e56-6b91df2ba637:
+      title: CreateJobApplicantResponse
+      description: Response for creating a job applicant
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Status of the response
+          example: true
+        message:
+          type: string
+          description: Message of the response
+          example: Job applicant created successfully
+        data:
+          type: object
+          description: Data of the response
+          properties:
+            job_application_id:
+              type: string
+              description: Job application ID
+              example: 123e4567-e89b-12d3-a456-426614174000
+    Access-Control-Allow-Origin:
+      type: string
+      default: '*'
+      example: https://developer.mozilla.org
+    365af817-7df6-4481-882f-076637a891f4:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    page:
+      type: integer
+    6387c5db-664c-4960-bfad-e8d8320cc9c3:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    keyword:
+      type: string
+    Access-Control-Allow-Credentials:
+      type: boolean
+      default: true
+    jobId:
+      type: string
+  securitySchemes:
+    apiKey:
+      description: API key to access the API
+      type: apiKey
+      name: x-api-key
+      in: header

@@ -1,0 +1,205 @@
+openapi: 3.2.0
+info:
+  title: micro1 Public Job API
+  description: micro1 ai-interview platform public API
+  version: 1.0.0
+  termsOfService: https://www.micro1.ai/terms-conditions
+  contact:
+    name: micro1 API Support
+    url: https://www.micro1.ai
+    email: support@micro1.ai
+servers:
+- url: https://public.api.micro1.ai
+  description: Production server
+security:
+- apiKey: []
+tags:
+- name: Job
+paths:
+  /jobs:
+    get:
+      summary: Get all jobs
+      description: Retrieve all jobs via this endpoint.
+      operationId: jobsApplicant
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          $ref: '#/components/schemas/page'
+      - name: limit
+        in: query
+        description: Number of items per page
+        required: false
+        schema:
+          $ref: '#/components/schemas/limit'
+      - name: keyword
+        in: query
+        description: Keyword to search for
+        required: false
+        schema:
+          $ref: '#/components/schemas/keyword'
+      tags:
+      - Job
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/1a1987e4-458f-4016-8b74-999b29e4b181'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/4233ee8a-be19-4eec-bd42-4bf4394b776a'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/66f85992-b0d6-4a29-ae40-7e9e284b8e3e'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+components:
+  schemas:
+    limit:
+      type: integer
+    1a1987e4-458f-4016-8b74-999b29e4b181:
+      title: GetJobsResponse
+      description: Response for getting all jobs
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Status of the response
+          example: true
+        message:
+          type: string
+          description: Message of the response
+          example: Jobs fetched successfully
+        data:
+          type: array
+          description: List of jobs
+          items:
+            title: Job
+            description: Job object
+            type: object
+            properties:
+              job_id:
+                type: string
+                description: ID of the job
+                example: 123e4567-e89b-12d3-a456-426614174000
+              job_title:
+                type: string
+                description: Title of the job
+                example: Full Stack Engineer
+              job_description:
+                type: string
+                description: Description of the job
+                example: We are looking for a Full Stack Engineer to join our team
+              job_code:
+                type: string
+                description: Code of the job
+                example: M0000001
+              ats_job_id:
+                type:
+                - string
+                - 'null'
+                description: ID of the job in the ATS
+                example: JOB123TEST
+              interview_id:
+                type:
+                - string
+                - 'null'
+                description: ID of the micro1 AI interview associated with the job
+                example: 123e4567-e89b-12d3-a456-426614174000
+              job_apply_url:
+                type: string
+                description: URL to apply for the job
+                example: https://jobs.micro1.ai/post/123e4567-e89b-12d3-a456-426614174000
+              job_status:
+                type: string
+                description: Status of the job
+                enum:
+                - open
+                - closed
+                example: open
+              date_created:
+                type: string
+                description: Date created of the job
+                example: '2021-01-01 00:00:00'
+              date_modified:
+                type:
+                - string
+                - 'null'
+                description: Date modified of the job
+                example: '2021-01-01 00:00:00'
+    4233ee8a-be19-4eec-bd42-4bf4394b776a:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    Access-Control-Allow-Origin:
+      type: string
+      default: '*'
+      example: https://developer.mozilla.org
+    66f85992-b0d6-4a29-ae40-7e9e284b8e3e:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    page:
+      type: integer
+    keyword:
+      type: string
+    Access-Control-Allow-Credentials:
+      type: boolean
+      default: true
+  securitySchemes:
+    apiKey:
+      description: API key to access the API
+      type: apiKey
+      name: x-api-key
+      in: header

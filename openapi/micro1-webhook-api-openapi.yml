@@ -1,0 +1,492 @@
+openapi: 3.2.0
+info:
+  title: micro1 Public Webhook API
+  description: micro1 ai-interview platform public API
+  version: 1.0.0
+  termsOfService: https://www.micro1.ai/terms-conditions
+  contact:
+    name: micro1 API Support
+    url: https://www.micro1.ai
+    email: support@micro1.ai
+servers:
+- url: https://public.api.micro1.ai
+  description: Production server
+security:
+- apiKey: []
+tags:
+- name: Webhook
+paths:
+  /webhook:
+    post:
+      summary: Create a webhook
+      description: This endpoint sets up a webhook for the AI Recruiter. It allows you to receive notifications, such as interview results, when a candidate completes the interview and the report is generated.
+      operationId: webhookSetup
+      parameters: []
+      tags:
+      - Webhook
+      security:
+      - apiKey: []
+      requestBody:
+        description: Request body to create a webhook
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/c0a95de5-b3a3-4aa0-8ded-cf0dee370dfe'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/d618c1b5-1fab-4a85-b47a-0ba785ec3483'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '400':
+          description: Bad Request
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/e0593660-b263-408a-a7b3-3025866fbf2d'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+  /webhooks:
+    get:
+      summary: Get all webhooks
+      description: This endpoint fetches all configured webhooks.
+      operationId: webhookSetup-51ac71f1-e1da-425d-afa2-d527e716b7e6
+      parameters: []
+      tags:
+      - Webhook
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/a01d0e1f-c9e5-4749-b5c3-d81b441aef78'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/f3a78de9-7fe6-419f-a732-8876302c32e5'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/c6d6045e-7ce4-4265-b6a7-3dd9c2d91f88'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+  /webhook/{webhookId}:
+    put:
+      summary: Update a webhook
+      description: This endpoint updates a webhook by ID.
+      operationId: webhookSetup-c050afb6-e424-4a49-81a7-839386c17724
+      parameters:
+      - name: webhookId
+        in: path
+        description: ID of the webhook to update
+        required: true
+        schema:
+          $ref: '#/components/schemas/webhookId'
+      tags:
+      - Webhook
+      security:
+      - apiKey: []
+      requestBody:
+        description: Request body to update a webhook
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/10ac9b2b-f47a-4893-9dfd-b164e5f27296'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/38c66421-4e5d-4a01-901d-532089270814'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fc04ce5e-c722-473b-a39a-3f7ad7d105b2'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/6b19eb61-c60f-4d00-ba83-ba0754f1579e'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+    delete:
+      summary: Delete a webhook
+      description: This endpoint deletes a webhook by ID.
+      operationId: webhookSetup-223f3d34-faeb-4c70-91df-a08a2baa2141
+      parameters:
+      - name: webhookId
+        in: path
+        description: ID of the webhook to delete
+        required: true
+        schema:
+          $ref: '#/components/schemas/webhookId'
+      tags:
+      - Webhook
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/5f1ecc87-1d45-41f1-93d0-7a3107e8bccb'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/02dd2b35-6a24-4cd5-b909-c8e3cf8cf28d'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/4e11c8b9-39b7-40b5-b9d9-0fcbc87dd83d'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+components:
+  schemas:
+    02dd2b35-6a24-4cd5-b909-c8e3cf8cf28d:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    fc04ce5e-c722-473b-a39a-3f7ad7d105b2:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    c6d6045e-7ce4-4265-b6a7-3dd9c2d91f88:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    4e11c8b9-39b7-40b5-b9d9-0fcbc87dd83d:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    d618c1b5-1fab-4a85-b47a-0ba785ec3483:
+      title: CreateWebhookResponse
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the webhook
+          example: 123e4567-e89b-12d3-a456-426614174000
+    6b19eb61-c60f-4d00-ba83-ba0754f1579e:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    5f1ecc87-1d45-41f1-93d0-7a3107e8bccb:
+      title: DeleteWebhookResponse
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Status of the response
+          example: 'true'
+        message:
+          type: string
+          description: Message of the response
+          example: Webhook deleted successfully
+    10ac9b2b-f47a-4893-9dfd-b164e5f27296:
+      title: UpdateWebhookRequest
+      type: object
+      required:
+      - url
+      - event
+      properties:
+        url:
+          type: string
+          description: Destination URL for the webhook
+          example: https://micro1.ai/webhook
+        description:
+          type: string
+          description: Description of the webhook
+          example: Webhook for interview reports
+        event:
+          type: string
+          description: Event to be sent to the webhook
+          enum:
+          - interview_report.created
+          - interview_recording.completed
+          - interview_webcam_recording.completed
+          - proctoring_score.completed
+          - applicant.completed
+          - applicant.created
+          - applicant.updated
+          - applicant.invited
+          - interview.started
+          - interview.completed
+    f3a78de9-7fe6-419f-a732-8876302c32e5:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    Access-Control-Allow-Origin:
+      type: string
+      default: '*'
+      example: https://developer.mozilla.org
+    e0593660-b263-408a-a7b3-3025866fbf2d:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    38c66421-4e5d-4a01-901d-532089270814:
+      title: UpdateWebhookResponse
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Status of the response
+          example: 'true'
+        message:
+          type: string
+          description: Message of the response
+          example: Webhook updated successfully
+    c0a95de5-b3a3-4aa0-8ded-cf0dee370dfe:
+      title: CreateWebhookRequest
+      type: object
+      required:
+      - url
+      - event
+      properties:
+        url:
+          type: string
+          description: Destination URL for the webhook
+          example: https://micro1.ai/webhook
+        description:
+          type: string
+          description: Description of the webhook
+          example: Webhook for interview reports
+        event:
+          type: string
+          description: Event to be sent to the webhook
+          enum:
+          - interview_report.created
+          - interview_recording.completed
+          - interview_webcam_recording.completed
+          - proctoring_score.completed
+          - applicant.completed
+          - applicant.created
+          - applicant.updated
+          - applicant.invited
+          - interview.started
+          - interview.completed
+    Access-Control-Allow-Credentials:
+      type: boolean
+      default: true
+    a01d0e1f-c9e5-4749-b5c3-d81b441aef78:
+      title: GetAllWebhooksResponse
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Status of the response
+          example: 'true'
+        message:
+          type: string
+          description: Message of the response
+          example: Webhooks fetched successfully
+        data:
+          type: array
+          description: Data of the response
+          items:
+            title: Webhook
+            type: object
+            properties:
+              webhook_id:
+                type: string
+                description: ID of the webhook
+                example: 123e4567-e89b-12d3-a456-426614174000
+              url:
+                type: string
+                description: URL of the webhook
+                example: https://micro1.ai/webhook
+              description:
+                type: string
+                description: Description of the webhook
+                example: Webhook to trigger when a interview report is created
+              event:
+                type: string
+                description: Event that the webhook will trigger
+                example: interview_report.created
+              date_created:
+                type: string
+                description: Date and time when the webhook was created
+                example: '2021-01-01 00:00:00'
+              date_modified:
+                type: string
+                description: Date and time when the webhook was last modified
+                example: '2021-01-01 00:00:00'
+              status:
+                type: string
+                description: Status of the webhook
+                example: active
+    webhookId:
+      type: string
+  securitySchemes:
+    apiKey:
+      description: API key to access the API
+      type: apiKey
+      name: x-api-key
+      in: header

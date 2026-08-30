@@ -1,0 +1,582 @@
+openapi: 3.2.0
+info:
+  title: micro1 Public Interview Reports API
+  description: micro1 ai-interview platform public API
+  version: 1.0.0
+  termsOfService: https://www.micro1.ai/terms-conditions
+  contact:
+    name: micro1 API Support
+    url: https://www.micro1.ai
+    email: support@micro1.ai
+servers:
+- url: https://public.api.micro1.ai
+  description: Production server
+security:
+- apiKey: []
+tags:
+- name: Interview Reports
+paths:
+  /interview/reports:
+    get:
+      summary: Get all completed reports
+      description: This endpoint retrieves reports for candidates who have completed their AI interviews. You can filter the reports by Interview ID, Candidate ID or Report ID.
+      operationId: aiInterviewer-c5c30f81-a2b4-45ca-9943-f034683993b0
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          $ref: '#/components/schemas/page'
+      - name: limit
+        in: query
+        description: Number of items per page
+        required: false
+        schema:
+          $ref: '#/components/schemas/limit'
+      - name: keyword
+        in: query
+        description: Keyword to search for
+        required: false
+        schema:
+          $ref: '#/components/schemas/keyword'
+      - name: interview_id
+        in: query
+        description: ID of the interview
+        required: false
+        schema:
+          $ref: '#/components/schemas/interview_id'
+      - name: candidate_id
+        in: query
+        description: ID of the candidate
+        required: false
+        schema:
+          $ref: '#/components/schemas/candidate_id'
+      tags:
+      - Interview Reports
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/3d3a53a2-49bc-4b72-af60-d6a25ef000db'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/0e0ac28a-dd51-4df8-a8cb-235cf6e1d8f6'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/9bf07ce6-fab6-4547-9474-b5e0cde16180'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+  /interview/recording:
+    get:
+      summary: Get interview recording
+      description: Returns interview recording data for a completed report. Requires report_id; resolves session from your account and proxies the internal recording service response, including any Set-Cookie headers from that service.
+      operationId: aiInterviewer-224f9971-cd82-4432-9f9f-8e4f1ba73345
+      parameters:
+      - name: report_id
+        in: query
+        description: Main report ID for the completed interview
+        required: false
+        schema:
+          $ref: '#/components/schemas/report_id'
+      - name: candidate_id
+        in: query
+        description: ID of the candidate
+        required: false
+        schema:
+          $ref: '#/components/schemas/candidate_id'
+      - name: session_id
+        in: query
+        description: ID of the interview session
+        required: false
+        schema:
+          $ref: '#/components/schemas/session_id'
+      tags:
+      - Interview Reports
+      security:
+      - apiKey: []
+      responses:
+        '200':
+          description: Payload from the interview recording service
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/258338a2-d768-43db-8a33-88a7c9d40e4d'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/4a557586-683c-4f41-80cf-a81057d2d931'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '404':
+          description: Report not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/baa130e1-9247-4e79-962d-d8a396991558'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/165205bd-8e2b-4793-8b45-536f6152047f'
+          headers:
+            Access-Control-Allow-Origin:
+              description: The Access-Control-Allow-Origin response header indicates whether the response can be shared with requesting code from the given [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin). - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Origin'
+            Access-Control-Allow-Credentials:
+              description: The Access-Control-Allow-Credentials response header tells browsers whether to expose the response to the frontend JavaScript code when the request's credentials mode ([Request.credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)) is include. - [MDN Link](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)
+              schema:
+                $ref: '#/components/schemas/Access-Control-Allow-Credentials'
+components:
+  schemas:
+    session_id:
+      type: string
+    0e0ac28a-dd51-4df8-a8cb-235cf6e1d8f6:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    interview_id:
+      type: string
+    limit:
+      type: integer
+    4a557586-683c-4f41-80cf-a81057d2d931:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    baa130e1-9247-4e79-962d-d8a396991558:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    9bf07ce6-fab6-4547-9474-b5e0cde16180:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    3d3a53a2-49bc-4b72-af60-d6a25ef000db:
+      title: GetInterviewReportsResponse
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Status of the response
+        message:
+          type: string
+          description: Message of the response
+        data:
+          type: array
+          description: Data of the response
+          items:
+            title: Report
+            type: object
+            properties:
+              report_id:
+                type: string
+                description: ID of the report
+                example: h0gqkAcaDJ
+              session_id:
+                type: string
+                description: ID of the interview session
+                example: 123e4567-e89b-12d3-a456-426614174000
+              interview_id:
+                type: string
+                description: ID of the interview
+                example: 123e4567-e89b-12d3-a456-426614174000
+              interview_name:
+                type: string
+                description: Name of the interview
+                example: Full Stack Engineer Interview
+              candidate_id:
+                type: string
+                description: ID of the candidate
+                example: 123e4567-e89b-12d3-a456-426614174000
+              job_applicant_id:
+                type: string
+                description: Optional ID of the job applicant, present only if linked to a job applicant
+                example: 123e4567-e89b-12d3-a456-426614174000
+              ats_job_application_id:
+                type:
+                - string
+                - 'null'
+                description: ID of the job application in external connected ATS
+                example: 123e4567-e89b-12d3-a456-426614174000
+              ats_job_id:
+                type:
+                - string
+                - 'null'
+                description: ID of the job in external connected ATS
+                example: 123e4567-e89b-12d3-a456-426614174000
+              candidate_name:
+                type: string
+                description: Name of the candidate
+                example: John Doe
+              candidate_email_id:
+                type: string
+                description: Email of the candidate
+                example: john.doe@micro1.ai
+              report_date:
+                type: string
+                description: Date of the interview
+                example: '2024-01-01'
+              report_url:
+                type: string
+                description: URL of the report
+                example: https://micro1.ai/report/h0gqkAcaDJ.pdf
+              interview_recording_url:
+                type: string
+                description: Direct URL of the interview recording. Use HLS (HTTP Live Streaming) library to play the interview video
+                example: https://micro1.ai/interview/h0gqkAcaDJ.m3u8
+              interview_recording_player_url:
+                type: string
+                description: URL to view the interview recording in micro1's web player interface
+                example: https://zara.micro1.ai/ai-interview-videos/abcxyz?id=123e4567-e89b-12d3-a456-426614174000
+              proctoring_score:
+                type: number
+                description: Proctoring score of the candidate
+                example: 85
+              ai_match_score:
+                type: number
+                description: AI match score of the candidate
+                example: 85
+              proctoring_violations:
+                type: array
+                description: List of proctoring violations
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      description: Type of the violation
+                      example: tab_switch
+                      enum:
+                      - tab_switch
+                      - eye_movement
+                      - ai_classifier
+                    value:
+                      type: string
+                      description: Value of the violation (number / percentage)
+                      example: '3'
+                    description:
+                      type: string
+                      description: Description of the violation
+                      example: 3 tab switches detected, indicating multitasking or external searches.
+              interview_transcript:
+                type: array
+                description: Transcript of the interview
+                items:
+                  type: object
+                  properties:
+                    timestamp:
+                      type:
+                      - number
+                      - 'null'
+                      description: Timestamp of the transcript in seconds
+                      example: 100
+                    role:
+                      type: string
+                      description: Role of the transcript
+                      example: interviewer
+                      enum:
+                      - interviewer
+                      - user
+                    content:
+                      type: string
+                      description: Text of the transcript
+                      example: Can you tell me about yourself?
+              technical_skills_evaluation:
+                type: array
+                description: Evaluation of the technical/non-technical skills
+                items:
+                  type: object
+                  properties:
+                    skill:
+                      type: string
+                      description: Name of the skill
+                      example: React.js
+                    ai_evaluation:
+                      type: object
+                      description: Evaluation of the skill by AI
+                      properties:
+                        feedback:
+                          type: string
+                          description: Feedback of the skill
+                          example: Candidate has demonstrated a solid understanding of optimizing FastAPI performance.
+                        rating:
+                          type: string
+                          description: Evaluation of the skill
+                          example: Senior
+                          enum:
+                          - Not experienced
+                          - Junior
+                          - Mid-level
+                          - Senior
+                    timestamp:
+                      type:
+                      - number
+                      - 'null'
+                      description: Timestamp in seconds when this specific skill evaluation started in the interview
+                      example: 100
+              soft_skills_evaluation:
+                type: array
+                description: Evaluation of the soft skills
+                items:
+                  type: object
+                  properties:
+                    skill:
+                      type: string
+                      description: Name of the soft skill
+                      example: Overall
+                    ai_evaluation:
+                      type: object
+                      description: Evaluation of the soft skill by AI
+                      properties:
+                        feedback:
+                          type: string
+                          description: Feedback of the soft skill
+                          example: Candidate demonstrated clear and organized thoughts throughout the interview, effectively addressing each question with relevant examples and explanations.
+                        rating:
+                          type: string
+                          description: Rating of the soft skill. For English language interviews, rating follows CEFR levels (A1 to C2). For other languages, rating ranges from Not Experienced to Excellent
+                          example: B1
+                          enum:
+                          - A1
+                          - A2
+                          - B1
+                          - B2
+                          - C1
+                          - C2
+                          - Not Experienced
+                          - Below Average
+                          - Average
+                          - Good
+                          - Excellent
+                        sub_score:
+                          type: object
+                          description: Sub score of the soft skill
+                          properties:
+                            vocabulary:
+                              type: string
+                              description: Vocabulary of the soft skill
+                            grammar:
+                              type: string
+                              description: Grammar of the soft skill
+                            critical_thinking:
+                              type: string
+                              description: Critical thinking of the soft skill
+              coding_skills_evaluation:
+                type: object
+                description: Evaluation of the coding skills
+                properties:
+                  feedback:
+                    type: string
+                    description: Feedback of the coding skills
+                    example: The candidate has demonstrated a good understanding of the problem
+                  rating:
+                    type: string
+                    description: Rating of the coding skills
+                    example: Senior
+                    enum:
+                    - Not experienced
+                    - Junior
+                    - Mid-level
+                    - Senior
+              custom_exercise_evaluation:
+                type:
+                - object
+                - 'null'
+                description: Evaluation of the custom exercise
+                properties:
+                  feedback:
+                    type: string
+                    description: Feedback of the custom exercise
+                    example: The candidate displayed a strong grasp of the custom exercise requirements and solved the problem effectively.
+                  rating:
+                    type: string
+                    description: Rating of the custom exercise
+                    example: Senior
+                    enum:
+                    - Not experienced
+                    - Junior
+                    - Mid-level
+                    - Senior
+              custom_question_evaluation:
+                type: array
+                description: Evaluation of the custom questions
+                items:
+                  type: object
+                  properties:
+                    question_text:
+                      type: string
+                      description: Question of the custom question
+                      example: Are you willing to relocate?
+                    answer_text:
+                      type: string
+                      description: Answer of the custom question
+                      example: Yes, I am willing to relocate
+                    ai_evaluation:
+                      type: object
+                      description: Evaluation of the custom question by AI
+                      properties:
+                        feedback:
+                          type: string
+                          description: Feedback of the custom question
+                          example: Candidate is willing to relocate with a 20% chance
+                        rating:
+                          type: string
+                          description: Rating of the custom question
+                          example: Great answer
+                          enum:
+                          - Not an impressive answer
+                          - Average answer
+                          - Good answer
+                          - Great answer
+              date_created:
+                type: string
+                description: Date created of the report
+                example: '2021-01-01 00:00:00'
+              date_modified:
+                type: string
+                description: Date modified of the report
+                example: '2021-01-01 00:00:00'
+              status:
+                type: string
+                description: Status of the report
+                example: active
+    Access-Control-Allow-Origin:
+      type: string
+      default: '*'
+      example: https://developer.mozilla.org
+    165205bd-8e2b-4793-8b45-536f6152047f:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    258338a2-d768-43db-8a33-88a7c9d40e4d:
+      type: object
+      description: Interview recording URL when available
+      properties:
+        status:
+          type: boolean
+          description: True when video_url is present
+        video_url:
+          type: string
+          format: uri
+          description: HLS playlist or video URL for the interview screenshare recording
+      required:
+      - status
+      - video_url
+    page:
+      type: integer
+    candidate_id:
+      type: string
+    report_id:
+      type: string
+    keyword:
+      type: string
+    Access-Control-Allow-Credentials:
+      type: boolean
+      default: true
+  securitySchemes:
+    apiKey:
+      description: API key to access the API
+      type: apiKey
+      name: x-api-key
+      in: header
