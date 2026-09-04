@@ -24,6 +24,19 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  - security
+  generated: '2026-09-03'
+  method: derived
 image: https://cdn.prod.website-files.com/6a04bd23eb9d40f76dac1249/6a21b7903ec396493b15c2a1_OG%20(52)%20(1).jpg
 x-type: company
 x-source: harvest:secondary-market
