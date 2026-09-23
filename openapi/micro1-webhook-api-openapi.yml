@@ -263,79 +263,6 @@ paths:
                 $ref: '#/components/schemas/Access-Control-Allow-Credentials'
 components:
   schemas:
-    02dd2b35-6a24-4cd5-b909-c8e3cf8cf28d:
-      title: BadRequestResponse
-      description: Response for bad requests
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-        message:
-          type: string
-          description: The error message
-          example: Invalid request
-    fc04ce5e-c722-473b-a39a-3f7ad7d105b2:
-      title: BadRequestResponse
-      description: Response for bad requests
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-        message:
-          type: string
-          description: The error message
-          example: Invalid request
-    c6d6045e-7ce4-4265-b6a7-3dd9c2d91f88:
-      title: InternalServerErrorResponse
-      description: Response for internal server error
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-    4e11c8b9-39b7-40b5-b9d9-0fcbc87dd83d:
-      title: InternalServerErrorResponse
-      description: Response for internal server error
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-    d618c1b5-1fab-4a85-b47a-0ba785ec3483:
-      title: CreateWebhookResponse
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of the webhook
-          example: 123e4567-e89b-12d3-a456-426614174000
-    6b19eb61-c60f-4d00-ba83-ba0754f1579e:
-      title: InternalServerErrorResponse
-      description: Response for internal server error
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-    5f1ecc87-1d45-41f1-93d0-7a3107e8bccb:
-      title: DeleteWebhookResponse
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Status of the response
-          example: 'true'
-        message:
-          type: string
-          description: Message of the response
-          example: Webhook deleted successfully
     10ac9b2b-f47a-4893-9dfd-b164e5f27296:
       title: UpdateWebhookRequest
       type: object
@@ -378,31 +305,6 @@ components:
           type: string
           description: The error message
           example: Invalid request
-    Access-Control-Allow-Origin:
-      type: string
-      default: '*'
-      example: https://developer.mozilla.org
-    e0593660-b263-408a-a7b3-3025866fbf2d:
-      title: InternalServerErrorResponse
-      description: Response for internal server error
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-    38c66421-4e5d-4a01-901d-532089270814:
-      title: UpdateWebhookResponse
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Status of the response
-          example: 'true'
-        message:
-          type: string
-          description: Message of the response
-          example: Webhook updated successfully
     c0a95de5-b3a3-4aa0-8ded-cf0dee370dfe:
       title: CreateWebhookRequest
       type: object
@@ -432,9 +334,109 @@ components:
           - applicant.invited
           - interview.started
           - interview.completed
+    e0593660-b263-408a-a7b3-3025866fbf2d:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
     Access-Control-Allow-Credentials:
       type: boolean
       default: true
+    fc04ce5e-c722-473b-a39a-3f7ad7d105b2:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    d618c1b5-1fab-4a85-b47a-0ba785ec3483:
+      title: CreateWebhookResponse
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the webhook
+          example: 123e4567-e89b-12d3-a456-426614174000
+    webhookId:
+      type: string
+    6b19eb61-c60f-4d00-ba83-ba0754f1579e:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    38c66421-4e5d-4a01-901d-532089270814:
+      title: UpdateWebhookResponse
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Status of the response
+          example: 'true'
+        message:
+          type: string
+          description: Message of the response
+          example: Webhook updated successfully
+    4e11c8b9-39b7-40b5-b9d9-0fcbc87dd83d:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    5f1ecc87-1d45-41f1-93d0-7a3107e8bccb:
+      title: DeleteWebhookResponse
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Status of the response
+          example: 'true'
+        message:
+          type: string
+          description: Message of the response
+          example: Webhook deleted successfully
+    02dd2b35-6a24-4cd5-b909-c8e3cf8cf28d:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    Access-Control-Allow-Origin:
+      type: string
+      default: '*'
+      example: https://developer.mozilla.org
+    c6d6045e-7ce4-4265-b6a7-3dd9c2d91f88:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
     a01d0e1f-c9e5-4749-b5c3-d81b441aef78:
       title: GetAllWebhooksResponse
       type: object
@@ -482,8 +484,6 @@ components:
                 type: string
                 description: Status of the webhook
                 example: active
-    webhookId:
-      type: string
   securitySchemes:
     apiKey:
       description: API key to access the API

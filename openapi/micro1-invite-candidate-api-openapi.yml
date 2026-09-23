@@ -167,99 +167,6 @@ paths:
                 $ref: '#/components/schemas/Access-Control-Allow-Credentials'
 components:
   schemas:
-    page:
-      type: integer
-    48ed7e9b-d5c0-4cac-a7f7-554cf2d38a61:
-      title: InternalServerErrorResponse
-      description: Response for internal server error
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-    interview_id:
-      type: string
-    ed1324fa-97e3-4327-989a-1365796365ff:
-      title: GetInvitesResponse
-      description: Response for getting all candidate invites
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Status of the response
-          example: 'true'
-        message:
-          type: string
-          description: Message of the response
-          example: Candidate invites fetched successfully
-        data:
-          type: array
-          description: List of candidate invites
-          items:
-            title: Report
-            type: object
-            properties:
-              candidate_id:
-                type: string
-                description: ID of the candidate
-                example: h0gqkAcaDJ
-              interview_id:
-                type: string
-                description: ID of the interview
-                example: 123e4567-e89b-12d3-a456-426614174000
-              interview_name:
-                type: string
-                description: Name of the interview
-                example: Full Stack Engineer Interview
-              candidate_name:
-                type: string
-                description: Name of the candidate
-                example: John Doe
-              candidate_email_id:
-                type: string
-                description: Email of the candidate
-                example: john.doe@micro1.ai
-              date_created:
-                type: string
-                description: Date created of the report
-                example: '2021-01-01 00:00:00'
-              date_modified:
-                type: string
-                description: Date modified of the report
-                example: '2021-01-01 00:00:00'
-              status:
-                type: string
-                description: Status of the report
-                example: active
-    limit:
-      type: integer
-    d24a9b8f-c64f-4661-9bfb-6b0874f15289:
-      title: BadRequestResponse
-      description: Response for bad requests
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-        message:
-          type: string
-          description: The error message
-          example: Invalid request
-    22038d2e-01bd-4d14-8751-a35ace89f2f0:
-      title: InternalServerErrorResponse
-      description: Response for internal server error
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-    Access-Control-Allow-Origin:
-      type: string
-      default: '*'
-      example: https://developer.mozilla.org
     c93fc8b1-3071-4de0-8f00-c22c8ac342e8:
       title: InviteCandidateRequest
       type: object
@@ -338,14 +245,107 @@ components:
                     type: string
                     description: The URL of the invitation
                     example: https://interview.micro1.ai/intro/micro1?cid=123e4567-e89b-12d3-a456-426614174000
-    candidate_id:
-      type: string
-    keyword:
-      type: string
     Access-Control-Allow-Credentials:
       type: boolean
       default: true
+    candidate_id:
+      type: string
+    interview_id:
+      type: string
+    48ed7e9b-d5c0-4cac-a7f7-554cf2d38a61:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    page:
+      type: integer
+    keyword:
+      type: string
     19f58cbb-0a5c-4362-9543-e11ecc14b188:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    limit:
+      type: integer
+    ed1324fa-97e3-4327-989a-1365796365ff:
+      title: GetInvitesResponse
+      description: Response for getting all candidate invites
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Status of the response
+          example: 'true'
+        message:
+          type: string
+          description: Message of the response
+          example: Candidate invites fetched successfully
+        data:
+          type: array
+          description: List of candidate invites
+          items:
+            title: Report
+            type: object
+            properties:
+              candidate_id:
+                type: string
+                description: ID of the candidate
+                example: h0gqkAcaDJ
+              interview_id:
+                type: string
+                description: ID of the interview
+                example: 123e4567-e89b-12d3-a456-426614174000
+              interview_name:
+                type: string
+                description: Name of the interview
+                example: Full Stack Engineer Interview
+              candidate_name:
+                type: string
+                description: Name of the candidate
+                example: John Doe
+              candidate_email_id:
+                type: string
+                description: Email of the candidate
+                example: john.doe@micro1.ai
+              date_created:
+                type: string
+                description: Date created of the report
+                example: '2021-01-01 00:00:00'
+              date_modified:
+                type: string
+                description: Date modified of the report
+                example: '2021-01-01 00:00:00'
+              status:
+                type: string
+                description: Status of the report
+                example: active
+    Access-Control-Allow-Origin:
+      type: string
+      default: '*'
+      example: https://developer.mozilla.org
+    22038d2e-01bd-4d14-8751-a35ace89f2f0:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    d24a9b8f-c64f-4661-9bfb-6b0874f15289:
       title: BadRequestResponse
       description: Response for bad requests
       type: object

@@ -193,6 +193,19 @@ paths:
                 $ref: '#/components/schemas/Access-Control-Allow-Credentials'
 components:
   schemas:
+    4a557586-683c-4f41-80cf-a81057d2d931:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
     session_id:
       type: string
     0e0ac28a-dd51-4df8-a8cb-235cf6e1d8f6:
@@ -208,23 +221,13 @@ components:
           type: string
           description: The error message
           example: Invalid request
-    interview_id:
+    Access-Control-Allow-Credentials:
+      type: boolean
+      default: true
+    report_id:
       type: string
-    limit:
-      type: integer
-    4a557586-683c-4f41-80cf-a81057d2d931:
-      title: BadRequestResponse
-      description: Response for bad requests
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-        message:
-          type: string
-          description: The error message
-          example: Invalid request
+    candidate_id:
+      type: string
     baa130e1-9247-4e79-962d-d8a396991558:
       title: BadRequestResponse
       description: Response for bad requests
@@ -238,15 +241,8 @@ components:
           type: string
           description: The error message
           example: Invalid request
-    9bf07ce6-fab6-4547-9474-b5e0cde16180:
-      title: InternalServerErrorResponse
-      description: Response for internal server error
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
+    interview_id:
+      type: string
     3d3a53a2-49bc-4b72-af60-d6a25ef000db:
       title: GetInterviewReportsResponse
       type: object
@@ -536,11 +532,26 @@ components:
                 type: string
                 description: Status of the report
                 example: active
+    page:
+      type: integer
+    keyword:
+      type: string
+    limit:
+      type: integer
+    165205bd-8e2b-4793-8b45-536f6152047f:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
     Access-Control-Allow-Origin:
       type: string
       default: '*'
       example: https://developer.mozilla.org
-    165205bd-8e2b-4793-8b45-536f6152047f:
+    9bf07ce6-fab6-4547-9474-b5e0cde16180:
       title: InternalServerErrorResponse
       description: Response for internal server error
       type: object
@@ -563,17 +574,6 @@ components:
       required:
       - status
       - video_url
-    page:
-      type: integer
-    candidate_id:
-      type: string
-    report_id:
-      type: string
-    keyword:
-      type: string
-    Access-Control-Allow-Credentials:
-      type: boolean
-      default: true
   securitySchemes:
     apiKey:
       description: API key to access the API

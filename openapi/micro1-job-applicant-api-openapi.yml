@@ -229,34 +229,19 @@ paths:
                 $ref: '#/components/schemas/Access-Control-Allow-Credentials'
 components:
   schemas:
-    e486e318-d331-48d4-91f8-e6df3799e17f:
-      title: CreateJobApplicantRequest
+    6387c5db-664c-4960-bfad-e8d8320cc9c3:
+      title: BadRequestResponse
+      description: Response for bad requests
       type: object
-      required:
-      - first_name
-      - last_name
-      - email_id
       properties:
-        first_name:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
           type: string
-          description: First name of the candidate
-          example: John
-        last_name:
-          type: string
-          description: Last name of the candidate
-          example: Doe
-        email_id:
-          type: string
-          description: Email of the candidate
-          example: john.doe@micro1.ai
-        phone_number:
-          type: string
-          description: Phone number of the candidate
-          example: '+1234567890'
-        resume_url:
-          type: string
-          description: URL of the resume (PDF or DOCX file)
-          example: https://micro1.ai/resume/h0gqkAcaDJ.pdf
+          description: The error message
+          example: Invalid request
     5e620761-46f4-4384-8a4d-548a7120e1db:
       title: InternalServerErrorResponse
       description: Response for internal server error
@@ -266,6 +251,9 @@ components:
           type: boolean
           description: Whether the request was successful
           example: false
+    Access-Control-Allow-Credentials:
+      type: boolean
+      default: true
     ab74bc6e-7117-48e4-8eae-64467adf1fc7:
       title: GetJobApplicantInfoResponse
       type: object
@@ -468,21 +456,6 @@ components:
               type: string
               description: Status of the report
               example: active
-    251cb858-d370-4f1b-9c5c-0c081a89c85e:
-      title: BadRequestResponse
-      description: Response for bad requests
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-        message:
-          type: string
-          description: The error message
-          example: Invalid request
-    limit:
-      type: integer
     f4b606ec-833f-484c-9e92-ec71fa6d0227:
       title: GetJobApplicantsResponse
       description: Response for getting all job applicants
@@ -674,8 +647,32 @@ components:
                 type: string
                 description: Status of the report
                 example: active
-    jobApplicantId:
-      type: string
+    251cb858-d370-4f1b-9c5c-0c081a89c85e:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    365af817-7df6-4481-882f-076637a891f4:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
     7c8f408f-2c68-459f-9c57-e928856cbbcd:
       title: InternalServerErrorResponse
       description: Response for internal server error
@@ -685,6 +682,8 @@ components:
           type: boolean
           description: Whether the request was successful
           example: false
+    page:
+      type: integer
     96c81713-d1a0-41f9-bb10-ae3954fe2fcc:
       title: InternalServerErrorResponse
       description: Response for internal server error
@@ -694,6 +693,12 @@ components:
           type: boolean
           description: Whether the request was successful
           example: false
+    keyword:
+      type: string
+    limit:
+      type: integer
+    jobApplicantId:
+      type: string
     5ce136f1-27c7-4a91-8e56-6b91df2ba637:
       title: CreateJobApplicantResponse
       description: Response for creating a job applicant
@@ -719,39 +724,34 @@ components:
       type: string
       default: '*'
       example: https://developer.mozilla.org
-    365af817-7df6-4481-882f-076637a891f4:
-      title: BadRequestResponse
-      description: Response for bad requests
+    e486e318-d331-48d4-91f8-e6df3799e17f:
+      title: CreateJobApplicantRequest
       type: object
+      required:
+      - first_name
+      - last_name
+      - email_id
       properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-        message:
+        first_name:
           type: string
-          description: The error message
-          example: Invalid request
-    page:
-      type: integer
-    6387c5db-664c-4960-bfad-e8d8320cc9c3:
-      title: BadRequestResponse
-      description: Response for bad requests
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-        message:
+          description: First name of the candidate
+          example: John
+        last_name:
           type: string
-          description: The error message
-          example: Invalid request
-    keyword:
-      type: string
-    Access-Control-Allow-Credentials:
-      type: boolean
-      default: true
+          description: Last name of the candidate
+          example: Doe
+        email_id:
+          type: string
+          description: Email of the candidate
+          example: john.doe@micro1.ai
+        phone_number:
+          type: string
+          description: Phone number of the candidate
+          example: '+1234567890'
+        resume_url:
+          type: string
+          description: URL of the resume (PDF or DOCX file)
+          example: https://micro1.ai/resume/h0gqkAcaDJ.pdf
     jobId:
       type: string
   securitySchemes:

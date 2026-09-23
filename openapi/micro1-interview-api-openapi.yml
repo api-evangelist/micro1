@@ -411,7 +411,397 @@ paths:
                 $ref: '#/components/schemas/Access-Control-Allow-Credentials'
 components:
   schemas:
+    890496ef-5475-45d1-a79c-090267478eb3:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    interviewId:
+      type: string
+    48fd3e4c-81c8-463d-a6ca-f0d3b9b1b048:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    b94b355b-60c8-4422-8bad-e5c028d564c2:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    fe74cb1a-f0be-4b3f-97c1-7c97f143f926:
+      title: CreateInterviewResponse
+      description: Response for creating an interview
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: true
+        message:
+          type: string
+          description: The message for the response
+          example: Interview created successfully
+        data:
+          type: object
+          description: Interview details
+          properties:
+            interview_id:
+              type: string
+              description: Unique identifier for the interview
+              example: 123e4567-e89b-12d3-a456-426614174000
+            invite_url:
+              type: string
+              description: The URL to invite the candidates to the interview
+              example: https://interview.micro1.ai/intro/micro1?uid=123e4567-e89b-12d3-a456-426614174000
+    9126af2f-e06b-4a71-8b76-b9c8f66f552e:
+      title: UpdateInterviewRequest
+      description: Request to update an interview
+      type: object
+      properties:
+        interview_name:
+          type: string
+          description: Name of the interview
+          example: Full Stack Engineer Interview
+        skills:
+          type: array
+          items:
+            type: object
+            required:
+            - name
+            properties:
+              name:
+                type: string
+                description: Name of the skill
+                example: React
+              description:
+                type: string
+                description: More information about the skill
+                example: Must be proficient in React Context API
+          description: Required skills for the interview (max 10)
+          example:
+          - name: React
+            description: Must be proficient in React Context API
+        custom_question_list:
+          type: array
+          items:
+            type: object
+            properties:
+              question:
+                type: string
+                description: The question to ask the candidate
+                example: What are your strengths and weaknesses?
+              time:
+                type: number
+                description: The time limit for the question in minutes (min 1, max 4)
+                example: 2
+              type:
+                type: string
+                description: The type of question
+                example: audio
+                enum:
+                - audio
+                - text
+          description: Custom questions for the interview (max 20)
+          example:
+          - question: What are your strengths and weaknesses?
+            time: 2
+            type: audio
+        interview_language:
+          type: string
+          description: The language in which the AI interview will be conducted
+          default: en
+          example: en
+          enum:
+          - en
+          - fr
+          - de
+          - he
+          - hi
+          - pt
+          - es
+          - es-la
+          - tr
+          - ja
+          - sv
+          - ar
+          - pl
+          - dk
+          - kr
+          - it
+          - nl
+          - cz
+          - ua
+          - ur
+          - id
+          - en-GB
+          - es-MX
+          - cn
+          - zh-CN
+          - zh-TW
+          - zh-HK
+          - ru
+          - bn
+          - ms
+          - pt-BR
+          - vi
+          - tl
+          - th
+          - afb
+          - pt-PT
+        can_change_interview_language:
+          type: boolean
+          description: Whether the candidate can change the language
+          default: false
+        only_coding_round:
+          type: boolean
+          description: Whether the interview is a coding round only
+          default: false
+        is_coding_round_required:
+          type: boolean
+          description: ​​Whether the coding round is required
+          default: false
+        selected_coding_language:
+          type: string
+          description: The coding language for the coding round
+          example: python
+        coding_exercise_details:
+          type: string
+          description: 'Add more details to tailor the coding exercise (optional) - Note: The candidate won''t be able to use outside libraries.'
+          example: Make the DSA problem extremely difficult and focus on a problem that will require recursion to solve efficiently.
+        is_proctoring_required:
+          type: boolean
+          description: Whether the proctoring is required
+          default: true
+    35476b4b-b1f2-49b7-8bb2-d0dc33fdf869:
+      title: GetSampleInterviewQuestionsRequest
+      description: Request to get a sample interview question
+      type: object
+      required:
+      - skills
+      properties:
+        skills:
+          type: array
+          items:
+            type: object
+            required:
+            - name
+            properties:
+              name:
+                type: string
+                description: Name of the skill
+                example: React
+              description:
+                type: string
+                description: More information about the skill
+                example: Must be proficient in React Context API
+          description: Required skills for the sample interview questions (max 10)
+          example:
+          - name: React
+            description: Must be proficient in React Context API
+    b2697d86-2b45-482c-9957-83a3cc227365:
+      title: UpdateInterviewResponse
+      description: Response for updating an interview
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: true
+        message:
+          type: string
+          description: The message for the response
+          example: Interview updated successfully
+    0acae7b7-5e11-4fc4-a1ff-06aaa8115fbf:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
     limit:
+      type: integer
+    4651c8bc-45a2-444b-93d7-bcd5fb9b8c82:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    28d74bab-c21a-49e7-9499-82d841b8c11b:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    338a7eb8-2dcc-424c-a88b-59a6b4122b66:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    61381ad1-48b5-4910-b2b2-dfc5d60bb5bf:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    Access-Control-Allow-Credentials:
+      type: boolean
+      default: true
+    8b24a4dd-e959-4345-8e0e-7551d63da6e8:
+      title: GetAllInterviewsResponse
+      description: Response for getting all interviews
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Status of the response
+          example: 'true'
+        message:
+          type: string
+          description: Message of the response
+          example: Interviews fetched successfully
+        data:
+          type: array
+          description: List of interviews
+          items:
+            title: Interview
+            description: Interview object
+            type: object
+            properties:
+              interview_id:
+                type: string
+                description: ID of the interview
+                example: 123e4567-e89b-12d3-a456-426614174000
+              interview_name:
+                type: string
+                description: Name of the interview
+                example: Full Stack Engineer Interview
+              invite_url:
+                type: string
+                description: The URL to invite the candidates to the interview
+                example: https://interview.micro1.ai/intro/micro1?uid=123e4567-e89b-12d3-a456-426614174000
+              skills:
+                type: array
+                description: Required skills for the interview
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Name of the skill
+                      example: React
+                    description:
+                      type: string
+                      description: Description of the skill
+                      example: Must be proficient in React Context API
+                example:
+                - name: React
+                  description: Must be proficient in React Context API
+              custom_questions:
+                type: array
+                description: Custom questions for the interview
+                items:
+                  type: object
+                  description: Custom question for the interview
+                  properties:
+                    question:
+                      type: string
+                      description: The question for the interview
+                      example: Where do you see yourself in 5 years?
+                    time:
+                      type: number
+                      description: The time for the question in seconds
+                      example: 120
+                    type:
+                      type: string
+                      description: The type of the question
+                      example: audio
+                      enum:
+                      - audio
+                      - text
+                example:
+                - question: Where do you see yourself in 5 years?
+                  time: 120
+                  type: audio
+              interview_language:
+                type: string
+                description: Language of the interview
+                example: English
+              can_change_interview_language:
+                type: boolean
+                description: Whether the candidate can change the interview language
+                example: false
+              only_coding_round:
+                type: boolean
+                description: Whether the interview is a coding round only
+                example: true
+              is_coding_round_required:
+                type: boolean
+                description: ​​Whether the coding round is required
+                example: true
+              selected_coding_language:
+                type: string
+                description: The coding language for the coding round
+                example: Python
+              is_proctoring_required:
+                type: boolean
+                description: Whether the proctoring is required
+                example: true
+              date_created:
+                type: string
+                description: Date created of the interview
+                example: '2021-01-01 00:00:00'
+              date_modified:
+                type: string
+                description: Date modified of the interview
+                example: '2021-01-01 00:00:00'
+              status:
+                type: string
+                description: Status of the interview
+                example: active
+    page:
       type: integer
     5bf9749c-a439-449a-bbed-fc2c74dd9b39:
       title: CreateCustomQuestionInterviewRequest
@@ -500,20 +890,22 @@ components:
           type: boolean
           description: Whether the proctoring is required
           default: true
-    5333077b-0b49-46f7-bc97-51cb80bca346:
-      title: BadRequestResponse
-      description: Response for bad requests
+    keyword:
+      type: string
+    1488b560-7b17-47ee-862e-2c138a397929:
+      title: DeleteInterviewResponse
+      description: Response for deleting an interview
       type: object
       properties:
         status:
           type: boolean
           description: Whether the request was successful
-          example: false
+          example: true
         message:
           type: string
-          description: The error message
-          example: Invalid request
-    0e874cf3-8175-4bc0-be8e-58d4bfc07a79:
+          description: The message for the response
+          example: Interview deleted successfully
+    6989178e-6fd2-4b1d-938d-68284bed155e:
       title: InternalServerErrorResponse
       description: Response for internal server error
       type: object
@@ -522,23 +914,7 @@ components:
           type: boolean
           description: Whether the request was successful
           example: false
-    48fd3e4c-81c8-463d-a6ca-f0d3b9b1b048:
-      title: BadRequestResponse
-      description: Response for bad requests
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-        message:
-          type: string
-          description: The error message
-          example: Invalid request
-    Access-Control-Allow-Credentials:
-      type: boolean
-      default: true
-    61381ad1-48b5-4910-b2b2-dfc5d60bb5bf:
+    5333077b-0b49-46f7-bc97-51cb80bca346:
       title: BadRequestResponse
       description: Response for bad requests
       type: object
@@ -576,7 +952,7 @@ components:
               type: string
               description: The URL to invite the candidates to the interview
               example: https://interview.micro1.ai/intro/micro1?uid=123e4567-e89b-12d3-a456-426614174000
-    6989178e-6fd2-4b1d-938d-68284bed155e:
+    0e874cf3-8175-4bc0-be8e-58d4bfc07a79:
       title: InternalServerErrorResponse
       description: Response for internal server error
       type: object
@@ -585,31 +961,42 @@ components:
           type: boolean
           description: Whether the request was successful
           example: false
-    fe74cb1a-f0be-4b3f-97c1-7c97f143f926:
-      title: CreateInterviewResponse
-      description: Response for creating an interview
+    7db5fe92-97a7-429a-804c-e2f3942fc072:
+      title: GetSampleInterviewQuestionsResponse
+      description: Response for getting a sample interview question
       type: object
       properties:
         status:
           type: boolean
-          description: Whether the request was successful
-          example: true
+          description: Status of the response
+          example: 'true'
         message:
           type: string
-          description: The message for the response
-          example: Interview created successfully
+          description: Message of the response
+          example: Sample interview question fetched successfully
         data:
-          type: object
-          description: Interview details
-          properties:
-            interview_id:
-              type: string
-              description: Unique identifier for the interview
-              example: 123e4567-e89b-12d3-a456-426614174000
-            invite_url:
-              type: string
-              description: The URL to invite the candidates to the interview
-              example: https://interview.micro1.ai/intro/micro1?uid=123e4567-e89b-12d3-a456-426614174000
+          type: array
+          description: List of sample interview questions
+          items:
+            title: SampleInterviewQuestion
+            description: Sample interview question object
+            type: object
+            properties:
+              skill:
+                type: string
+                description: Name of the skill
+                example: React
+              questions:
+                type: array
+                description: List of sample interview questions
+                items:
+                  type: string
+                  description: Sample interview question
+                  example: What is React?
+    Access-Control-Allow-Origin:
+      type: string
+      default: '*'
+      example: https://developer.mozilla.org
     1c4bf13b-ae82-4085-9b3e-e87c2c62fb92:
       title: CreateInterviewRequest
       description: Request to create an interview
@@ -747,393 +1134,6 @@ components:
           type: boolean
           description: Whether the proctoring is required
           default: true
-    0acae7b7-5e11-4fc4-a1ff-06aaa8115fbf:
-      title: BadRequestResponse
-      description: Response for bad requests
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-        message:
-          type: string
-          description: The error message
-          example: Invalid request
-    page:
-      type: integer
-    b94b355b-60c8-4422-8bad-e5c028d564c2:
-      title: BadRequestResponse
-      description: Response for bad requests
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-        message:
-          type: string
-          description: The error message
-          example: Invalid request
-    338a7eb8-2dcc-424c-a88b-59a6b4122b66:
-      title: InternalServerErrorResponse
-      description: Response for internal server error
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-    keyword:
-      type: string
-    890496ef-5475-45d1-a79c-090267478eb3:
-      title: InternalServerErrorResponse
-      description: Response for internal server error
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-    35476b4b-b1f2-49b7-8bb2-d0dc33fdf869:
-      title: GetSampleInterviewQuestionsRequest
-      description: Request to get a sample interview question
-      type: object
-      required:
-      - skills
-      properties:
-        skills:
-          type: array
-          items:
-            type: object
-            required:
-            - name
-            properties:
-              name:
-                type: string
-                description: Name of the skill
-                example: React
-              description:
-                type: string
-                description: More information about the skill
-                example: Must be proficient in React Context API
-          description: Required skills for the sample interview questions (max 10)
-          example:
-          - name: React
-            description: Must be proficient in React Context API
-    28d74bab-c21a-49e7-9499-82d841b8c11b:
-      title: InternalServerErrorResponse
-      description: Response for internal server error
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-    b2697d86-2b45-482c-9957-83a3cc227365:
-      title: UpdateInterviewResponse
-      description: Response for updating an interview
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: true
-        message:
-          type: string
-          description: The message for the response
-          example: Interview updated successfully
-    Access-Control-Allow-Origin:
-      type: string
-      default: '*'
-      example: https://developer.mozilla.org
-    4651c8bc-45a2-444b-93d7-bcd5fb9b8c82:
-      title: InternalServerErrorResponse
-      description: Response for internal server error
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-    7db5fe92-97a7-429a-804c-e2f3942fc072:
-      title: GetSampleInterviewQuestionsResponse
-      description: Response for getting a sample interview question
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Status of the response
-          example: 'true'
-        message:
-          type: string
-          description: Message of the response
-          example: Sample interview question fetched successfully
-        data:
-          type: array
-          description: List of sample interview questions
-          items:
-            title: SampleInterviewQuestion
-            description: Sample interview question object
-            type: object
-            properties:
-              skill:
-                type: string
-                description: Name of the skill
-                example: React
-              questions:
-                type: array
-                description: List of sample interview questions
-                items:
-                  type: string
-                  description: Sample interview question
-                  example: What is React?
-    1488b560-7b17-47ee-862e-2c138a397929:
-      title: DeleteInterviewResponse
-      description: Response for deleting an interview
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: true
-        message:
-          type: string
-          description: The message for the response
-          example: Interview deleted successfully
-    9126af2f-e06b-4a71-8b76-b9c8f66f552e:
-      title: UpdateInterviewRequest
-      description: Request to update an interview
-      type: object
-      properties:
-        interview_name:
-          type: string
-          description: Name of the interview
-          example: Full Stack Engineer Interview
-        skills:
-          type: array
-          items:
-            type: object
-            required:
-            - name
-            properties:
-              name:
-                type: string
-                description: Name of the skill
-                example: React
-              description:
-                type: string
-                description: More information about the skill
-                example: Must be proficient in React Context API
-          description: Required skills for the interview (max 10)
-          example:
-          - name: React
-            description: Must be proficient in React Context API
-        custom_question_list:
-          type: array
-          items:
-            type: object
-            properties:
-              question:
-                type: string
-                description: The question to ask the candidate
-                example: What are your strengths and weaknesses?
-              time:
-                type: number
-                description: The time limit for the question in minutes (min 1, max 4)
-                example: 2
-              type:
-                type: string
-                description: The type of question
-                example: audio
-                enum:
-                - audio
-                - text
-          description: Custom questions for the interview (max 20)
-          example:
-          - question: What are your strengths and weaknesses?
-            time: 2
-            type: audio
-        interview_language:
-          type: string
-          description: The language in which the AI interview will be conducted
-          default: en
-          example: en
-          enum:
-          - en
-          - fr
-          - de
-          - he
-          - hi
-          - pt
-          - es
-          - es-la
-          - tr
-          - ja
-          - sv
-          - ar
-          - pl
-          - dk
-          - kr
-          - it
-          - nl
-          - cz
-          - ua
-          - ur
-          - id
-          - en-GB
-          - es-MX
-          - cn
-          - zh-CN
-          - zh-TW
-          - zh-HK
-          - ru
-          - bn
-          - ms
-          - pt-BR
-          - vi
-          - tl
-          - th
-          - afb
-          - pt-PT
-        can_change_interview_language:
-          type: boolean
-          description: Whether the candidate can change the language
-          default: false
-        only_coding_round:
-          type: boolean
-          description: Whether the interview is a coding round only
-          default: false
-        is_coding_round_required:
-          type: boolean
-          description: ​​Whether the coding round is required
-          default: false
-        selected_coding_language:
-          type: string
-          description: The coding language for the coding round
-          example: python
-        coding_exercise_details:
-          type: string
-          description: 'Add more details to tailor the coding exercise (optional) - Note: The candidate won''t be able to use outside libraries.'
-          example: Make the DSA problem extremely difficult and focus on a problem that will require recursion to solve efficiently.
-        is_proctoring_required:
-          type: boolean
-          description: Whether the proctoring is required
-          default: true
-    8b24a4dd-e959-4345-8e0e-7551d63da6e8:
-      title: GetAllInterviewsResponse
-      description: Response for getting all interviews
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Status of the response
-          example: 'true'
-        message:
-          type: string
-          description: Message of the response
-          example: Interviews fetched successfully
-        data:
-          type: array
-          description: List of interviews
-          items:
-            title: Interview
-            description: Interview object
-            type: object
-            properties:
-              interview_id:
-                type: string
-                description: ID of the interview
-                example: 123e4567-e89b-12d3-a456-426614174000
-              interview_name:
-                type: string
-                description: Name of the interview
-                example: Full Stack Engineer Interview
-              invite_url:
-                type: string
-                description: The URL to invite the candidates to the interview
-                example: https://interview.micro1.ai/intro/micro1?uid=123e4567-e89b-12d3-a456-426614174000
-              skills:
-                type: array
-                description: Required skills for the interview
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                      description: Name of the skill
-                      example: React
-                    description:
-                      type: string
-                      description: Description of the skill
-                      example: Must be proficient in React Context API
-                example:
-                - name: React
-                  description: Must be proficient in React Context API
-              custom_questions:
-                type: array
-                description: Custom questions for the interview
-                items:
-                  type: object
-                  description: Custom question for the interview
-                  properties:
-                    question:
-                      type: string
-                      description: The question for the interview
-                      example: Where do you see yourself in 5 years?
-                    time:
-                      type: number
-                      description: The time for the question in seconds
-                      example: 120
-                    type:
-                      type: string
-                      description: The type of the question
-                      example: audio
-                      enum:
-                      - audio
-                      - text
-                example:
-                - question: Where do you see yourself in 5 years?
-                  time: 120
-                  type: audio
-              interview_language:
-                type: string
-                description: Language of the interview
-                example: English
-              can_change_interview_language:
-                type: boolean
-                description: Whether the candidate can change the interview language
-                example: false
-              only_coding_round:
-                type: boolean
-                description: Whether the interview is a coding round only
-                example: true
-              is_coding_round_required:
-                type: boolean
-                description: ​​Whether the coding round is required
-                example: true
-              selected_coding_language:
-                type: string
-                description: The coding language for the coding round
-                example: Python
-              is_proctoring_required:
-                type: boolean
-                description: Whether the proctoring is required
-                example: true
-              date_created:
-                type: string
-                description: Date created of the interview
-                example: '2021-01-01 00:00:00'
-              date_modified:
-                type: string
-                description: Date modified of the interview
-                example: '2021-01-01 00:00:00'
-              status:
-                type: string
-                description: Status of the interview
-                example: active
-    interviewId:
-      type: string
     3e6955c6-1b91-4818-a780-401b36e276c0:
       title: BadRequestResponse
       description: Response for bad requests

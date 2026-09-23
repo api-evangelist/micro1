@@ -1,0 +1,38 @@
+{
+  "provider": "micro1",
+  "sources": [
+    "_original/micro1-ai-recruiter-openapi-original.json"
+  ],
+  "outputs": [
+    "micro1-interview-api-openapi.yml",
+    "micro1-interview-reports-api-openapi.yml",
+    "micro1-invite-candidate-api-openapi.yml",
+    "micro1-job-api-openapi.yml",
+    "micro1-job-applicant-api-openapi.yml",
+    "micro1-webhook-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "micro1-ai-recruiter-openapi-original.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "micro1-ai-recruiter-openapi-original.json: declared missing tag: Interview",
+    "micro1-ai-recruiter-openapi-original.json: declared missing tag: Interview Reports",
+    "micro1-ai-recruiter-openapi-original.json: declared missing tag: Invite Candidate",
+    "micro1-ai-recruiter-openapi-original.json: declared missing tag: Job",
+    "micro1-ai-recruiter-openapi-original.json: declared missing tag: Job Applicant",
+    "micro1-ai-recruiter-openapi-original.json: declared missing tag: Webhook",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/micro1-ai-recruiter-openapi.yml: archived document superseded by a larger archived document",
+    "micro1-interview-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "micro1-interview-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "micro1-invite-candidate-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "micro1-job-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "micro1-job-applicant-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "micro1-webhook-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}
