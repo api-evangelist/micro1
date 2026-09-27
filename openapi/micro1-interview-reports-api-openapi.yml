@@ -193,40 +193,7 @@ paths:
                 $ref: '#/components/schemas/Access-Control-Allow-Credentials'
 components:
   schemas:
-    4a557586-683c-4f41-80cf-a81057d2d931:
-      title: BadRequestResponse
-      description: Response for bad requests
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-        message:
-          type: string
-          description: The error message
-          example: Invalid request
     session_id:
-      type: string
-    0e0ac28a-dd51-4df8-a8cb-235cf6e1d8f6:
-      title: BadRequestResponse
-      description: Response for bad requests
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-        message:
-          type: string
-          description: The error message
-          example: Invalid request
-    Access-Control-Allow-Credentials:
-      type: boolean
-      default: true
-    report_id:
-      type: string
-    candidate_id:
       type: string
     baa130e1-9247-4e79-962d-d8a396991558:
       title: BadRequestResponse
@@ -241,6 +208,46 @@ components:
           type: string
           description: The error message
           example: Invalid request
+    9bf07ce6-fab6-4547-9474-b5e0cde16180:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    165205bd-8e2b-4793-8b45-536f6152047f:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+    limit:
+      type: integer
+    page:
+      type: integer
+    Access-Control-Allow-Origin:
+      type: string
+      default: '*'
+      example: https://developer.mozilla.org
+    258338a2-d768-43db-8a33-88a7c9d40e4d:
+      type: object
+      description: Interview recording URL when available
+      properties:
+        status:
+          type: boolean
+          description: True when video_url is present
+        video_url:
+          type: string
+          format: uri
+          description: HLS playlist or video URL for the interview screenshare recording
+      required:
+      - status
+      - video_url
     interview_id:
       type: string
     3d3a53a2-49bc-4b72-af60-d6a25ef000db:
@@ -532,48 +539,41 @@ components:
                 type: string
                 description: Status of the report
                 example: active
-    page:
-      type: integer
+    candidate_id:
+      type: string
+    0e0ac28a-dd51-4df8-a8cb-235cf6e1d8f6:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
     keyword:
       type: string
-    limit:
-      type: integer
-    165205bd-8e2b-4793-8b45-536f6152047f:
-      title: InternalServerErrorResponse
-      description: Response for internal server error
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-    Access-Control-Allow-Origin:
+    report_id:
       type: string
-      default: '*'
-      example: https://developer.mozilla.org
-    9bf07ce6-fab6-4547-9474-b5e0cde16180:
-      title: InternalServerErrorResponse
-      description: Response for internal server error
+    4a557586-683c-4f41-80cf-a81057d2d931:
+      title: BadRequestResponse
+      description: Response for bad requests
       type: object
       properties:
         status:
           type: boolean
           description: Whether the request was successful
           example: false
-    258338a2-d768-43db-8a33-88a7c9d40e4d:
-      type: object
-      description: Interview recording URL when available
-      properties:
-        status:
-          type: boolean
-          description: True when video_url is present
-        video_url:
+        message:
           type: string
-          format: uri
-          description: HLS playlist or video URL for the interview screenshare recording
-      required:
-      - status
-      - video_url
+          description: The error message
+          example: Invalid request
+    Access-Control-Allow-Credentials:
+      type: boolean
+      default: true
   securitySchemes:
     apiKey:
       description: API key to access the API

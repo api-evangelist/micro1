@@ -92,18 +92,21 @@ paths:
                 $ref: '#/components/schemas/Access-Control-Allow-Credentials'
 components:
   schemas:
-    66f85992-b0d6-4a29-ae40-7e9e284b8e3e:
-      title: InternalServerErrorResponse
-      description: Response for internal server error
+    4233ee8a-be19-4eec-bd42-4bf4394b776a:
+      title: BadRequestResponse
+      description: Response for bad requests
       type: object
       properties:
         status:
           type: boolean
           description: Whether the request was successful
           example: false
-    Access-Control-Allow-Credentials:
-      type: boolean
-      default: true
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
+    limit:
+      type: integer
     1a1987e4-458f-4016-8b74-999b29e4b181:
       title: GetJobsResponse
       description: Response for getting all jobs
@@ -176,27 +179,24 @@ components:
                 example: '2021-01-01 00:00:00'
     page:
       type: integer
-    keyword:
-      type: string
-    limit:
-      type: integer
     Access-Control-Allow-Origin:
       type: string
       default: '*'
       example: https://developer.mozilla.org
-    4233ee8a-be19-4eec-bd42-4bf4394b776a:
-      title: BadRequestResponse
-      description: Response for bad requests
+    66f85992-b0d6-4a29-ae40-7e9e284b8e3e:
+      title: InternalServerErrorResponse
+      description: Response for internal server error
       type: object
       properties:
         status:
           type: boolean
           description: Whether the request was successful
           example: false
-        message:
-          type: string
-          description: The error message
-          example: Invalid request
+    keyword:
+      type: string
+    Access-Control-Allow-Credentials:
+      type: boolean
+      default: true
   securitySchemes:
     apiKey:
       description: API key to access the API

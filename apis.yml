@@ -54,8 +54,9 @@ tags:
 - Human Resources
 - Proctoring
 - Webhook
-- agent-native
+- Agent-Native
 - AI Training Data
+- A2A
 tags_raw:
 - Company
 - recruiting
@@ -69,6 +70,7 @@ tags_raw:
 - webhooks
 - agent-native
 - ai-training-data
+- A2A
 apis:
 - aid: micro1:micro1-interview-api
   name: micro1 Interview API
@@ -303,3 +305,10 @@ x-enrichment:
   status: enriched
   artifacts_added: 24
   pass: local-v1
+x-a2a:
+  verified: true
+  probed: '2026-09-26'
+  url: "https://ai-recruiter.micro1.ai/.well-known/agent-card.json"
+  grade: "conformant"
+  protocol_version: "0.3"
+  control: 404
