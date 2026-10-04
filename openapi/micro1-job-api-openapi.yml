@@ -92,32 +92,6 @@ paths:
                 $ref: '#/components/schemas/Access-Control-Allow-Credentials'
 components:
   schemas:
-    keyword:
-      type: string
-    page:
-      type: integer
-    4233ee8a-be19-4eec-bd42-4bf4394b776a:
-      title: BadRequestResponse
-      description: Response for bad requests
-      type: object
-      properties:
-        status:
-          type: boolean
-          description: Whether the request was successful
-          example: false
-        message:
-          type: string
-          description: The error message
-          example: Invalid request
-    limit:
-      type: integer
-    Access-Control-Allow-Credentials:
-      type: boolean
-      default: true
-    Access-Control-Allow-Origin:
-      type: string
-      default: '*'
-      example: https://developer.mozilla.org
     1a1987e4-458f-4016-8b74-999b29e4b181:
       title: GetJobsResponse
       description: Response for getting all jobs
@@ -188,6 +162,19 @@ components:
                 - 'null'
                 description: Date modified of the job
                 example: '2021-01-01 00:00:00'
+    Access-Control-Allow-Origin:
+      type: string
+      default: '*'
+      example: https://developer.mozilla.org
+    Access-Control-Allow-Credentials:
+      type: boolean
+      default: true
+    limit:
+      type: integer
+    page:
+      type: integer
+    keyword:
+      type: string
     66f85992-b0d6-4a29-ae40-7e9e284b8e3e:
       title: InternalServerErrorResponse
       description: Response for internal server error
@@ -197,6 +184,19 @@ components:
           type: boolean
           description: Whether the request was successful
           example: false
+    4233ee8a-be19-4eec-bd42-4bf4394b776a:
+      title: BadRequestResponse
+      description: Response for bad requests
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Whether the request was successful
+          example: false
+        message:
+          type: string
+          description: The error message
+          example: Invalid request
   securitySchemes:
     apiKey:
       description: API key to access the API
