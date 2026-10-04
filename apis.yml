@@ -246,6 +246,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/micro1-capability-edges.yml
+  name: micro1 Business Capability Map
 - type: Website
   url: https://www.micro1.ai/
 - type: DeveloperPortal

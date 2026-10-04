@@ -1,0 +1,63 @@
+slug: micro1
+provider: micro1
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Interview
+  spec_file: micro1-interview-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.9
+  evidence: POST /interview aiInterviewer "Create a new interview"; "AI recruiter, Zara, runs conversational
+    technical interviews at scale"
+  reason: Creating and managing candidate interviews is recruiting/hiring, i.e. Talent Acquisition Management.
+- tag: Job Applicant
+  spec_file: micro1-job-applicant-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.9
+  evidence: POST /job/{jobId}/applicant  "Create a job applicant"; GET /job/applicant/{jobApplicantId}  "Get
+    Job Applicant Details"
+  reason: CRUD over applicants against job openings is core candidate/applicant tracking, squarely Talent
+    Acquisition Management.
+- tag: Invite Candidate
+  spec_file: micro1-invite-candidate-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.88
+  evidence: POST /interview/invite — "Invite candidates to an interview"; GET /interview/invites — "Get
+    all invited candidates"
+  reason: Operations invite and list candidates for AI-run technical interviews, i.e. recruiting/selection
+    activity within the employee hiring lifecycle — Talent Acquisition Management.
+- tag: Interview Reports
+  spec_file: micro1-interview-reports-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.85
+  evidence: GET /interview/reports "Get all completed reports"; schemas include candidate_id, interview_id
+  reason: Candidate interview scorecards and recordings support hiring assessment decisions, squarely
+    Talent Acquisition Management.
+- tag: Job
+  spec_file: micro1-job-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.7
+  evidence: GET /jobs  jobsApplicant  "Get all jobs"
+  reason: Single read of job openings on a recruiting/interview platform (operationId 'jobsApplicant'
+    links it to applicants), so it supports requisition/hiring workflow. Thin evidence, hence moderate
+    confidence.
