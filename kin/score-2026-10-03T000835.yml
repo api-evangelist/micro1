@@ -1,34 +1,31 @@
-# Kin Score artifact — micro1 — 2026-09-01T063623
+# Kin Score artifact — micro1 — 2026-10-03T000835
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: micro1
-  schema_version: 0.17.2
-  scored_at: '2026-09-01'
-  run_ts: 2026-09-01T063623
-  composite: 43.4
+  schema_version: 0.23.0
+  scored_at: '2026-10-03'
+  run_ts: 2026-10-03T000835
+  composite: 41.8
   band: developing
   facets:
-    discoverability: 75.9
-    contract_quality: 63.3
-    governance: 4.5
+    discoverability: 75.0
+    contract_quality: 57.0
+    contract_governance: 4.5
     operational_transparency: 7.9
     developer_ergonomics: 64.3
-    commercial_clarity: 27.6
-    contract_governance: 4.5
     access_clarity: 27.6
   agent_readiness:
-    score: 42.4
+    score: 33.8
     band: agent-ready
-    band_gated_from: agent-native
     dimensions:
       spec_presence: true
       agentic_access: derived
       reversibility_documented: false
-      mcp_server: verified
+      mcp_server: platform
       auth_clarity: bearer
       idempotency: false
-      error_semantics: documented
+      error_semantics: derived
       openapi_examples: false
       rate_limit_signal: false
       event_surface_described: true
@@ -41,13 +38,19 @@ kin_score:
       protected_resource_metadata: false
       dynamic_client_registration: false
       agentic_commerce: false
+  regulatory:
+    applies: true
+    regime: Employment & Payroll
+    regime_id: employment_payroll
+    score: 24.5
+    matched_via: weak_tags
   provenance:
     mcp: first-party
     skills: first-party
     agentic_access: derived
     conformance: derived
     contracts:
-      total: 1
+      total: 6
       derived: 0
       coverage: 0.0
       callable: 100.0
