@@ -27,3 +27,53 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: micro1-a2a-protocol-own-agent-card
+  label: A2A protocol (own Agent Card)
+  partner_name: A2A protocol (own Agent Card)
+  category: A2A agent
+  type: register
+  channel: provider-built
+  evidence: https://ai-recruiter.micro1.ai/.well-known/agent-card.json
+  source: edge
+  relationship: compatible
+  contract_reference:
+    register: provider's own /.well-known/agent-card.json
+    spec_file: null
+    standard: A2A
+    role: a2a-agent-card
+    registered_name: micro1 API
+    organization: micro1 API
+    matched_domain: micro1.ai
+    matched_by: own-domain
+    detected_by: sweep-ai-agents.py
+    detected: '2026-10-19'
+  status: not-a-workflow
+  arazzo: null
+- slug: micro1-antler
+  label: Antler
+  partner_name: Antler
+  category: accelerator portfolio participation
+  type: register
+  channel: standard-directory
+  evidence: https://www.antler.co/portfolio?0b933bfd_page=12
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Antler portfolio (antler.co/portfolio)
+    standard: null
+    spec_file: null
+    role: accelerator-portfolio-company
+    registered_name: Micro1
+    register_id: https://www.antler.co/portfolio?0b933bfd_page=12
+    register_country: US
+    register_website: https://www.micro1.ai/
+    matched_domain: micro1.ai
+    matched_by: domain
+    signal_note: 'participation only: the accelerator''s own portfolio register lists the company (cohort / investment);
+      an ownership and participation record, not conformance or certification'
+    detected_by: sweep-accelerator-portfolios.py
+    detected: '2026-10-21'
+    year: '2025'
+    sector: B2B Software
+  status: not-a-workflow
+  arazzo: null
