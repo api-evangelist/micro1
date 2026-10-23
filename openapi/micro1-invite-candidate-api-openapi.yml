@@ -364,3 +364,9 @@ components:
       type: apiKey
       name: x-api-key
       in: header
+x-provenance:
+  method: harvested
+  publisher: micro1
+  source: https://ai-recruiter.micro1.ai/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
